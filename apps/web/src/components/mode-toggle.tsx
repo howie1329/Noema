@@ -3,12 +3,21 @@ import { useEffect, useState } from "react"
 
 import { useTheme } from "@/components/theme-provider"
 import { Button } from "@workspace/ui/components/button"
+import { cn } from "@workspace/ui/lib/utils"
 
 function readIsDark() {
   return document.documentElement.classList.contains("dark")
 }
 
-export function ModeToggle() {
+type ModeToggleProps = {
+  variant?: "outline" | "ghost"
+  className?: string
+}
+
+export function ModeToggle({
+  variant = "outline",
+  className,
+}: ModeToggleProps) {
   const { theme, setTheme } = useTheme()
   const [isDark, setIsDark] = useState(false)
 
@@ -30,9 +39,9 @@ export function ModeToggle() {
   return (
     <Button
       type="button"
-      variant="outline"
+      variant={variant}
       size="icon"
-      className="size-9 shrink-0"
+      className={cn("size-9 shrink-0", className)}
       onClick={handleToggle}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >

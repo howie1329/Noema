@@ -1,68 +1,62 @@
 import { Link } from "@tanstack/react-router"
 
-import { buttonVariants } from "@workspace/ui/components/button"
-import { cn } from "@workspace/ui/lib/utils"
-
+import { BrandMark } from "@/components/landing/brand-mark"
 import { ModeToggle } from "@/components/mode-toggle"
 
-const NAV_LINKS = [
+const FEATURE_LINKS = [
   { label: "Notes", href: "#notes" },
   { label: "Auto-linking", href: "#auto-linking" },
   { label: "Chat", href: "#chat" },
   { label: "Privacy", href: "#privacy" },
 ] as const
 
+function FeatureLinks({ className }: { className?: string }) {
+  return (
+    <>
+      {FEATURE_LINKS.map((link) => (
+        <a
+          key={link.href}
+          href={link.href}
+          onClick={(event) => event.preventDefault()}
+          className={className}
+        >
+          {link.label}
+        </a>
+      ))}
+    </>
+  )
+}
+
+const featureLinkClass =
+  "rounded-sm text-sm text-foreground/80 transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/40 focus-visible:outline-none"
+
 export function LandingNav() {
   return (
-    <header className="relative z-10 border-b border-border/50 bg-background/80 backdrop-blur-sm">
+    <header className="bg-zinc-100 dark:bg-zinc-950">
       <h1 className="sr-only">Noema</h1>
-      <div className="mx-auto flex w-full max-w-6xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-[1fr_auto] items-center gap-4 px-4 py-4 sm:px-6 md:grid-cols-[1fr_auto_1fr] lg:px-8">
         <Link
           to="/"
-          className="flex items-center gap-2.5 font-semibold tracking-tight text-foreground"
+          className="flex items-center gap-2.5 justify-self-start font-semibold tracking-tight text-foreground"
         >
-          <span
-            className="flex size-7 shrink-0 items-center justify-center rounded-md border border-border bg-foreground text-xs font-semibold text-background"
-            aria-hidden
-          >
-            n
-          </span>
+          <BrandMark />
           Noema
         </Link>
         <nav
-          className="mx-auto hidden items-center justify-center gap-x-6 text-sm text-muted-foreground lg:flex"
-          aria-label="Product"
+          className="hidden items-center gap-6 md:flex"
+          aria-label="Features"
         >
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </a>
-          ))}
+          <FeatureLinks className={featureLinkClass} />
         </nav>
-        <div className="ml-auto flex items-center gap-2 sm:gap-3">
-          <Link
-            to="/auth"
-            search={{ mode: "sign-in" }}
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "sm" }),
-              "hidden text-muted-foreground sm:inline-flex"
-            )}
-          >
-            Log in
-          </Link>
-          <Link
-            to="/auth"
-            search={{ mode: "sign-up" }}
-            className={cn(buttonVariants({ size: "sm" }), "rounded-full px-4")}
-          >
-            Start
-          </Link>
-          <ModeToggle />
+        <div className="justify-self-end">
+          <ModeToggle variant="ghost" />
         </div>
+        <nav
+          className="col-span-2 flex gap-4 overflow-x-auto md:hidden"
+          aria-label="Features"
+        >
+          <FeatureLinks className={`${featureLinkClass} shrink-0`} />
+        </nav>
       </div>
     </header>
   )

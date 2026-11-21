@@ -19,7 +19,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "ChatGPT that knows your notes, and notes that can think.",
+          "An assistant that knows your notes, and notes that can think.",
       },
     ],
     links: [
@@ -45,7 +45,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <ThemeProvider defaultTheme="dark" storageKey="theme">
+        <ThemeProvider defaultTheme="light" storageKey="theme">
           {children}
         </ThemeProvider>
         <Scripts />

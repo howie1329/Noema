@@ -1,6 +1,5 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router"
 
-import { LandingFooter } from "@/components/landing/landing-footer"
 import { LandingNav } from "@/components/landing/landing-nav"
 
 export const Route = createFileRoute("/_marketing")({
@@ -9,12 +8,9 @@ export const Route = createFileRoute("/_marketing")({
 
 function MarketingLayout() {
   return (
-    <div className="flex min-h-svh flex-col bg-background">
+    <div className="flex min-h-dvh flex-col bg-zinc-100 text-foreground selection:bg-foreground selection:text-background dark:bg-zinc-950">
       <LandingNav />
-      <div className="flex-1">
-        <Outlet />
-      </div>
-      <LandingFooter />
+      <Outlet />
     </div>
   )
 }
