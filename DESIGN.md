@@ -4,42 +4,41 @@
 
 ## World
 
-**Light editorial SaaS (marketing).** Calm off-white canvas, black primary actions, Inter for all UI copy. Violet appears only as ambient atmosphere behind the product frame and inside product imagery (AI affordances in-app).
+**Developer SaaS marketing (Vercel register).** Dark-first neutral canvas, crisp borders, centered thesis copy, inverse primary for the main CTA. Atmosphere is a **line grid** masked behind the hero only—not violet wash or product rasters.
 
 ## Color
 
 | Role | Usage |
 | --- | --- |
-| Canvas | `background` — near-white |
-| Text | `foreground` / `muted-foreground` for hierarchy |
-| Primary CTA | `primary` (black) on `primary-foreground` |
-| Atmosphere | Radial `oklch(0.93 0.07 285)` behind hero → preview |
-| Borders | `border` at 30–80% opacity for separation |
+| Canvas | `background` — near-black in dark default |
+| Text | `foreground` / `muted-foreground` |
+| Primary CTA | `primary` on `primary-foreground` (reads as light pill on dark) |
+| Cards | `card` / `border` at 80% opacity on feature grid |
+| Accents | No marketing violet; violet reserved for in-app AI affordances |
 
 ## Typography
 
 - **Sans:** Inter Variable (`packages/ui` globals)
-- **Hero:** ~3.25rem, weight 600, tracking −0.03em, centered, balance
-- **Body:** 1rem–1.125rem, muted secondary, max ~42ch in hero
+- **Hero:** ~2.5–3rem, weight 600, tracking −0.03em, centered, balance
+- **Body:** 1rem–1.125rem, muted secondary, ~max 36ch in hero
 
 ## Layout (landing `/`)
 
-1. **Nav:** Logo left, section anchors right (no header auth)
-2. **Hero (desktop):** Split — left: headline, subcopy, waitlist; right: auth card (Sign in / Sign up toggle)
-3. **Hero (mobile):** Stack — copy → waitlist → auth card
-4. **Proof:** Full-width browser-framed product screenshot
-5. **Features:** Centered text blocks, anchor targets for nav
+1. **Nav:** Logo left; section anchors center (lg+); right **Log in** + **Start** + theme toggle
+2. **Hero:** Centered headline, subcopy, pill waitlist (sole hero action)
+3. **Features:** 2×2 bordered cards + short intro line; no screenshot section
+4. **Footer:** Minimal centered copy
 
 ## Components
 
-- **Waitlist track:** Single bordered `rounded-2xl` shell; input flush left, button inset right
-- **Product frame:** `rounded-2xl`, traffic-light chrome bar, deep soft shadow
-- **Controls:** `rounded-lg` / `rounded-xl`; pills only on small controls where shadcn defaults apply
+- **Waitlist:** Rounded-full compound control on sm+ (input + button)
+- **Auth:** Dialog from header; labeled fields; mode toggle in form footer
+- **Controls:** `rounded-full` for primary marketing CTAs; `rounded-xl` for cards
 
 ## Motion
 
-No entrance choreography on marketing landing; `prefers-reduced-motion` respected globally. Interactions: hover on links and buttons only.
+No entrance choreography on marketing landing; `prefers-reduced-motion` respected globally. Hover on links and buttons only.
 
 ## Reference
 
-Approved marketing comp: `.impeccable/reference/landing-inspo.png`
+Shape brief: Vercel-like centered marketing, features-only proof (Nov 2025).

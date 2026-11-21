@@ -45,7 +45,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <ThemeProvider defaultTheme="system" storageKey="theme">
+        <ThemeProvider defaultTheme="dark" storageKey="theme">
           {children}
         </ThemeProvider>
         <Scripts />

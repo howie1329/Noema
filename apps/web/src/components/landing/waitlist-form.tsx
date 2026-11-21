@@ -29,12 +29,12 @@ export function WaitlistForm({ align = "center" }: WaitlistFormProps) {
   return (
     <div
       className={[
-        "w-full max-w-xl space-y-3",
+        "w-full max-w-lg space-y-3",
         align === "center" ? "mx-auto" : "mx-auto lg:mx-0",
       ].join(" ")}
     >
       <form
-        className="flex w-full items-stretch overflow-hidden rounded-2xl border border-border bg-background p-1.5 shadow-sm"
+        className="flex w-full flex-col gap-2 sm:flex-row sm:items-stretch sm:rounded-full sm:border sm:border-border sm:bg-background sm:p-1"
         onSubmit={handleSubmit}
       >
         <Input
@@ -47,10 +47,14 @@ export function WaitlistForm({ align = "center" }: WaitlistFormProps) {
             setEmail(event.target.value)
             setAcknowledged(false)
           }}
-          className="h-11 min-w-0 flex-1 rounded-xl border-0 bg-transparent px-3 shadow-none focus-visible:border-transparent focus-visible:ring-0"
+          className="h-11 rounded-full border-border bg-background px-4 shadow-none sm:border-0 sm:bg-transparent sm:focus-visible:ring-0"
           aria-label="Email address"
         />
-        <Button type="submit" size="lg" className="h-11 shrink-0 rounded-xl px-5">
+        <Button
+          type="submit"
+          size="lg"
+          className="h-11 shrink-0 rounded-full px-6"
+        >
           Join the waitlist
         </Button>
       </form>
