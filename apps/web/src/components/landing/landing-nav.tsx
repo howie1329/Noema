@@ -7,9 +7,9 @@ const NAV_LINKS = [
 
 export function LandingNav() {
   return (
-    <header className="border-b border-border/60">
+    <header className="relative z-10 border-b border-border/50 bg-background/80 backdrop-blur-sm">
       <h1 className="sr-only">Noema</h1>
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3.5 sm:px-6 lg:px-8">
         <a
           href="/"
           className="flex items-center gap-2.5 font-semibold tracking-tight text-foreground"
@@ -23,7 +23,7 @@ export function LandingNav() {
           Noema
         </a>
         <nav
-          className="hidden items-center gap-6 text-sm text-muted-foreground md:flex"
+          className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-muted-foreground"
           aria-label="Product"
         >
           {NAV_LINKS.map((link) => (
@@ -31,20 +31,6 @@ export function LandingNav() {
               key={link.href}
               href={link.href}
               className="transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-        <nav
-          className="flex flex-wrap justify-end gap-x-3 gap-y-1 text-xs text-muted-foreground md:hidden"
-          aria-label="Product sections"
-        >
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="hover:text-foreground"
             >
               {link.label}
             </a>
