@@ -13,7 +13,12 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "TanStack Start Starter",
+        title: "Noema",
+      },
+      {
+        name: "description",
+        content:
+          "ChatGPT that knows your notes, and notes that can think.",
       },
     ],
     links: [
