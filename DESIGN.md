@@ -39,6 +39,10 @@
 
 No entrance choreography on marketing landing; `prefers-reduced-motion` respected globally. Hover on links and buttons only.
 
+## Auth (`/auth`)
+
+Mode: Operate. Minimal shell (logo + theme toggle), centered card, **segmented tabs** for Sign in | Sign up. URL `?mode=sign-in` | `sign-up`. Sign-up includes confirm password. UI-only until Clerk.
+
 ## Reference
 
-Shape brief: Vercel-like centered marketing, features-only proof (Nov 2025).
+Shape brief: Vercel-like centered marketing, features-only proof (Nov 2025). Combined auth page shape Nov 2025.

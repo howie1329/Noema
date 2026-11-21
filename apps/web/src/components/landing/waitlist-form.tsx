@@ -1,7 +1,12 @@
 import { useState } from "react"
 
-import { Button } from "@workspace/ui/components/button"
-import { Input } from "@workspace/ui/components/input"
+import { FieldDescription } from "@workspace/ui/components/field"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@workspace/ui/components/input-group"
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -29,38 +34,35 @@ export function WaitlistForm({ align = "center" }: WaitlistFormProps) {
   return (
     <div
       className={[
-        "w-full max-w-lg space-y-3",
+        "flex w-full max-w-lg flex-col gap-3",
         align === "center" ? "mx-auto" : "mx-auto lg:mx-0",
       ].join(" ")}
     >
-      <form
-        className="flex w-full flex-col gap-2 sm:flex-row sm:items-stretch sm:rounded-full sm:border sm:border-border sm:bg-background sm:p-1"
-        onSubmit={handleSubmit}
-      >
-        <Input
-          type="email"
-          name="email"
-          autoComplete="email"
-          placeholder="you@example.com"
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value)
-            setAcknowledged(false)
-          }}
-          className="h-11 rounded-full border-border bg-background px-4 shadow-none sm:border-0 sm:bg-transparent sm:focus-visible:ring-0"
-          aria-label="Email address"
-        />
-        <Button
-          type="submit"
-          size="lg"
-          className="h-11 shrink-0 rounded-full px-6"
-        >
-          Join the waitlist
-        </Button>
+      <form onSubmit={handleSubmit}>
+        <InputGroup className="h-11">
+          <InputGroupInput
+            type="email"
+            name="email"
+            autoComplete="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(event) => {
+              setEmail(event.target.value)
+              setAcknowledged(false)
+            }}
+            aria-label="Email address"
+            required
+          />
+          <InputGroupAddon align="inline-end">
+            <InputGroupButton type="submit" size="sm" className="px-4">
+              Join the waitlist
+            </InputGroupButton>
+          </InputGroupAddon>
+        </InputGroup>
       </form>
-      <p className={`text-sm text-muted-foreground ${captionAlign}`}>
+      <FieldDescription className={captionAlign}>
         Invite-only beta. Free, with limits.
-      </p>
+      </FieldDescription>
       {acknowledged ? (
         <p className={`text-sm text-foreground ${captionAlign}`} role="status">
           You&apos;re on the list. We&apos;ll reach out when a spot opens.

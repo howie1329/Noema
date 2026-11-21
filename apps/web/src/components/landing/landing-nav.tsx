@@ -1,6 +1,8 @@
-import { Button } from "@workspace/ui/components/button"
+import { Link } from "@tanstack/react-router"
 
-import { useLandingAuth } from "@/components/landing/landing-auth"
+import { buttonVariants } from "@workspace/ui/components/button"
+import { cn } from "@workspace/ui/lib/utils"
+
 import { ModeToggle } from "@/components/mode-toggle"
 
 const NAV_LINKS = [
@@ -11,14 +13,12 @@ const NAV_LINKS = [
 ] as const
 
 export function LandingNav() {
-  const { openAuth } = useLandingAuth()
-
   return (
     <header className="relative z-10 border-b border-border/50 bg-background/80 backdrop-blur-sm">
       <h1 className="sr-only">Noema</h1>
       <div className="mx-auto flex w-full max-w-6xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <a
-          href="/"
+        <Link
+          to="/"
           className="flex items-center gap-2.5 font-semibold tracking-tight text-foreground"
         >
           <span
@@ -28,7 +28,7 @@ export function LandingNav() {
             n
           </span>
           Noema
-        </a>
+        </Link>
         <nav
           className="mx-auto hidden items-center justify-center gap-x-6 text-sm text-muted-foreground lg:flex"
           aria-label="Product"
@@ -44,23 +44,23 @@ export function LandingNav() {
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-2 sm:gap-3">
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            className="hidden text-muted-foreground sm:inline-flex"
-            onClick={() => openAuth("sign-in")}
+          <Link
+            to="/auth"
+            search={{ mode: "sign-in" }}
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "sm" }),
+              "hidden text-muted-foreground sm:inline-flex"
+            )}
           >
             Log in
-          </Button>
-          <Button
-            type="button"
-            size="sm"
-            className="rounded-full px-4"
-            onClick={() => openAuth("sign-up")}
+          </Link>
+          <Link
+            to="/auth"
+            search={{ mode: "sign-up" }}
+            className={cn(buttonVariants({ size: "sm" }), "rounded-full px-4")}
           >
             Start
-          </Button>
+          </Link>
           <ModeToggle />
         </div>
       </div>

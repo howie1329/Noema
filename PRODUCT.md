@@ -70,6 +70,7 @@ Authoritative long-form source: [`docs/PRODUCT_BRIEF.md`](docs/PRODUCT_BRIEF.md)
 | App shell layout reference | [`docs/pictures/layout_draft.png`](docs/pictures/layout_draft.png) |
 | Marketing landing (no product raster) | [`apps/web/src/routes/_marketing/`](apps/web/src/routes/_marketing/) |
 | Shipped marketing surface | [`apps/web/src/routes/_marketing/`](apps/web/src/routes/_marketing/) |
+| Combined auth (UI-only) | [`apps/web/src/routes/auth.tsx`](apps/web/src/routes/auth.tsx) |
 
 **Do not fabricate:** customer logos, testimonials, benchmark numbers, pricing, or deployment claims not in the brief.
 

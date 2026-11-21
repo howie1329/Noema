@@ -1,3 +1,10 @@
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@workspace/ui/components/card"
+
 type FeatureSectionProps = {
   id: string
   title: string
@@ -6,16 +13,19 @@ type FeatureSectionProps = {
 
 export function FeatureSection({ id, title, description }: FeatureSectionProps) {
   return (
-    <article
+    <Card
       id={id}
-      className="scroll-mt-24 rounded-xl border border-border/80 bg-card/30 p-6 sm:p-8"
+      size="sm"
+      className="scroll-mt-24 bg-card/30 shadow-none ring-border/80"
     >
-      <h2 className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
-        {title}
-      </h2>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty sm:text-base">
-        {description}
-      </p>
-    </article>
+      <CardHeader>
+        <CardTitle className="text-lg font-semibold tracking-tight">
+          {title}
+        </CardTitle>
+        <CardDescription className="text-base leading-relaxed text-pretty">
+          {description}
+        </CardDescription>
+      </CardHeader>
+    </Card>
   )
 }
