@@ -38,7 +38,7 @@ Package manager: **pnpm** (`pnpm@11.25.0`). Node `>=22.12.0`.
 - Add shadcn components from the web app context: `pnpm dlx shadcn@latest add <name> -c apps/web`.
 - Prefer file-based routes under `apps/web/src/routes/`; regenerate the route tree when needed.
 - Do not invent npm scripts — only use scripts defined in package manifests.
-- Issue tracking is not configured in-repo; use the team's tracker if one exists outside this repo.
+- Issue tracking uses local markdown under `.scratch/<feature>/` — see `docs/agents/issue-tracker.md`.
 
 ## Companion docs
 
@@ -61,3 +61,17 @@ Optional later:
 2. Confirm UI imports resolve from `@workspace/ui`.
 3. Summarize what changed and how to verify it.
 <!-- agentkit:end agents -->
+
+## Agent skills
+
+### Issue tracker
+
+Local markdown under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default vocabulary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout (`CONTEXT.md` + `docs/adr/`). See `docs/agents/domain.md`.
