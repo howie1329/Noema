@@ -13,6 +13,7 @@ __unconfig*
 todos.json
 .pnpm-store
 .superpowers
+.impeccable
 
 # turbo
 .turbo
