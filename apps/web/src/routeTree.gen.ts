@@ -9,17 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as MarketingRouteImport } from './routes/_marketing'
+import { Route as MarketingRouteRouteImport } from './routes/_marketing/route'
 import { Route as MarketingIndexRouteImport } from './routes/_marketing/index'
 
-const MarketingRoute = MarketingRouteImport.update({
+const MarketingRouteRoute = MarketingRouteRouteImport.update({
   id: '/_marketing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MarketingIndexRoute = MarketingIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => MarketingRoute,
+  getParentRoute: () => MarketingRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -30,7 +30,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_marketing': typeof MarketingRouteWithChildren
+  '/_marketing': typeof MarketingRouteRouteWithChildren
   '/_marketing/': typeof MarketingIndexRoute
 }
 export interface FileRouteTypes {
@@ -42,7 +42,7 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  MarketingRoute: typeof MarketingRouteWithChildren
+  MarketingRouteRoute: typeof MarketingRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -51,7 +51,7 @@ declare module '@tanstack/react-router' {
       id: '/_marketing'
       path: ''
       fullPath: '/'
-      preLoaderRoute: typeof MarketingRouteImport
+      preLoaderRoute: typeof MarketingRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_marketing/': {
@@ -59,25 +59,25 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof MarketingIndexRouteImport
-      parentRoute: typeof MarketingRoute
+      parentRoute: typeof MarketingRouteRoute
     }
   }
 }
 
-interface MarketingRouteChildren {
+interface MarketingRouteRouteChildren {
   MarketingIndexRoute: typeof MarketingIndexRoute
 }
 
-const MarketingRouteChildren: MarketingRouteChildren = {
+const MarketingRouteRouteChildren: MarketingRouteRouteChildren = {
   MarketingIndexRoute: MarketingIndexRoute,
 }
 
-const MarketingRouteWithChildren = MarketingRoute._addFileChildren(
-  MarketingRouteChildren,
+const MarketingRouteRouteWithChildren = MarketingRouteRoute._addFileChildren(
+  MarketingRouteRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  MarketingRoute: MarketingRouteWithChildren,
+  MarketingRouteRoute: MarketingRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
