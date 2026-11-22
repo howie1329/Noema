@@ -2,12 +2,22 @@ import { useCallback, useEffect, useState } from "react"
 
 import { AppSidebar } from "@/components/shell/app-sidebar"
 import { MainArea } from "@/components/shell/main-area"
+import {
+  DEFAULT_FOCUSED_ID,
+  type ShellMode,
+} from "@/lib/shell-fixtures"
 
 const cardChrome =
   "flex min-h-0 flex-col overflow-hidden rounded-xl border bg-card shadow-sm"
 
 export function WorkspaceShell() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [mode, setMode] = useState<ShellMode>("home")
+  const [focusedId, setFocusedId] = useState(DEFAULT_FOCUSED_ID)
+
+  const selectItem = useCallback((itemId: string) => {
+    setFocusedId(itemId)
+  }, [])
 
   const toggleSidebar = useCallback(() => {
     setSidebarOpen((open) => !open)
@@ -33,7 +43,13 @@ export function WorkspaceShell() {
     <div className="flex h-dvh gap-2 p-2">
       {sidebarOpen ? (
         <aside className={`w-64 shrink-0 ${cardChrome}`}>
-          <AppSidebar onCollapse={toggleSidebar} />
+          <AppSidebar
+            mode={mode}
+            onModeChange={setMode}
+            focusedId={focusedId}
+            onSelectItem={selectItem}
+            onCollapse={toggleSidebar}
+          />
         </aside>
       ) : null}
       <section className={`min-w-0 flex-1 ${cardChrome}`}>
