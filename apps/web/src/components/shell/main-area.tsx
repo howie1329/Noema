@@ -46,14 +46,13 @@ export function MainArea({
   onCloseTab,
 }: MainAreaProps) {
   const focusedId = focusedItem.id
-  const breadcrumbSegments =
-    focusedItem.breadcrumbs ?? [focusedItem.title]
+  const breadcrumbSegments = focusedItem.breadcrumbs ?? [focusedItem.title]
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      <div className="flex h-9 shrink-0 items-end border-b bg-muted/30 px-1">
+    <div className="flex h-full min-h-0 flex-col text-xs">
+      <div className="flex h-8 shrink-0 items-end border-b bg-muted/30 px-1">
         <ScrollArea className="w-full whitespace-nowrap">
-          <div className="flex h-9 items-end gap-0.5 px-1">
+          <div className="flex h-8 items-end gap-0.5 px-0.5">
             {openTabs.map((tab) => {
               const item = FIXTURE_ITEMS[tab.itemId]
               const isActive = tab.itemId === focusedId
@@ -64,7 +63,7 @@ export function MainArea({
                 <div
                   key={tab.id}
                   className={cn(
-                    "group flex h-8 max-w-[11rem] shrink-0 items-center gap-1 rounded-t-md border border-b-0 px-2 text-xs",
+                    "group flex h-7 max-w-[10rem] shrink-0 items-center gap-1 rounded-t-md border border-b-0 px-1.5 text-[11px]",
                     isActive
                       ? "border-border bg-card text-foreground shadow-xs"
                       : "border-transparent bg-transparent text-muted-foreground hover:bg-muted/50 hover:text-foreground"
@@ -72,7 +71,7 @@ export function MainArea({
                 >
                   <button
                     type="button"
-                    className="flex min-w-0 flex-1 items-center gap-1.5 text-left"
+                    className="flex min-w-0 flex-1 items-center gap-1 text-left"
                     onClick={() => onSelectTab(tab.itemId)}
                   >
                     <Icon className="size-3 shrink-0 opacity-70" />
@@ -104,32 +103,37 @@ export function MainArea({
         </ScrollArea>
       </div>
 
-      <header className="flex h-11 shrink-0 items-center gap-2 border-b px-3">
+      <header className="flex h-9 shrink-0 items-center gap-1.5 border-b px-2.5">
         {!sidebarOpen ? (
           <Button
             variant="ghost"
             size="icon-sm"
+            className="size-7 text-muted-foreground"
             onClick={onExpandSidebar}
             aria-label="Expand sidebar"
           >
-            <PanelRightOpen />
+            <PanelRightOpen className="size-3.5" />
           </Button>
         ) : null}
 
         <Breadcrumb className="min-w-0 flex-1">
-          <BreadcrumbList className="flex-nowrap overflow-hidden">
+          <BreadcrumbList className="flex-nowrap gap-1 overflow-hidden text-[11px] sm:gap-1.5">
             {breadcrumbSegments.map((segment, index) => {
               const isLast = index === breadcrumbSegments.length - 1
               return (
                 <span key={`${segment}-${index}`} className="contents">
-                  {index > 0 ? <BreadcrumbSeparator /> : null}
+                  {index > 0 ? (
+                    <BreadcrumbSeparator className="[&>svg]:size-3" />
+                  ) : null}
                   <BreadcrumbItem className="min-w-0">
                     {isLast ? (
-                      <BreadcrumbPage className="truncate">
+                      <BreadcrumbPage className="truncate text-[11px] font-normal">
                         {segment}
                       </BreadcrumbPage>
                     ) : (
-                      <span className="truncate">{segment}</span>
+                      <span className="truncate text-muted-foreground">
+                        {segment}
+                      </span>
                     )}
                   </BreadcrumbItem>
                 </span>
@@ -138,18 +142,39 @@ export function MainArea({
           </BreadcrumbList>
         </Breadcrumb>
 
-        <div className="flex shrink-0 items-center gap-1">
-          <Badge variant="secondary" className="font-normal">
+        <div className="flex shrink-0 items-center gap-0.5">
+          <Badge
+            variant="secondary"
+            className="h-5 px-1.5 text-[10px] font-normal"
+          >
             Saved
           </Badge>
-          <Button variant="ghost" size="icon-sm" aria-label="Share" disabled>
-            <Share2 />
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            className="size-7 text-muted-foreground"
+            aria-label="Share"
+            disabled
+          >
+            <Share2 className="size-3.5" />
           </Button>
-          <Button variant="ghost" size="icon-sm" aria-label="Favorite" disabled>
-            <Star />
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            className="size-7 text-muted-foreground"
+            aria-label="Favorite"
+            disabled
+          >
+            <Star className="size-3.5" />
           </Button>
-          <Button variant="ghost" size="icon-sm" aria-label="More options" disabled>
-            <Ellipsis />
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            className="size-7 text-muted-foreground"
+            aria-label="More options"
+            disabled
+          >
+            <Ellipsis className="size-3.5" />
           </Button>
         </div>
       </header>

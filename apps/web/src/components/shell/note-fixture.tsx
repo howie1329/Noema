@@ -24,7 +24,7 @@ function PropertyRow({
   children: ReactNode
 }) {
   return (
-    <div className="grid grid-cols-[7rem_1fr] gap-x-3 gap-y-1 text-sm">
+    <div className="grid grid-cols-[6.5rem_1fr] items-center gap-x-3 gap-y-0.5 text-xs">
       <span className="text-muted-foreground">{label}</span>
       <div className="min-w-0">{children}</div>
     </div>
@@ -37,27 +37,31 @@ export function NoteFixture({ item }: NoteFixtureProps) {
 
   return (
     <ScrollArea className="h-full min-h-0 flex-1">
-      <article className="mx-auto w-full max-w-[720px] px-6 py-8">
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+      <article className="mx-auto w-full max-w-[720px] px-5 py-5">
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">
           {item.title}
         </h1>
 
         {properties ? (
-          <Collapsible defaultOpen className="mt-5">
+          <Collapsible defaultOpen className="mt-3">
             <CollapsibleTrigger
               className={cn(
-                "flex w-full items-center gap-1.5 text-left text-sm font-medium text-foreground",
+                "flex w-full items-center gap-1 text-left text-xs font-medium text-muted-foreground",
+                "hover:text-foreground",
                 "[&[data-panel-open]_svg.chevron]:rotate-90"
               )}
             >
-              <ChevronRight className="chevron size-4 shrink-0 text-muted-foreground transition-transform" />
+              <ChevronRight className="chevron size-3.5 shrink-0 transition-transform" />
               Properties
             </CollapsibleTrigger>
             <CollapsibleContent>
-              <div className="mt-3 space-y-2.5 rounded-lg border bg-muted/30 px-4 py-3">
+              <div className="mt-2 space-y-1.5 rounded-md border bg-muted/20 px-3 py-2.5">
                 {properties.type ? (
                   <PropertyRow label="Type">
-                    <Badge variant="secondary" className="font-mono font-normal">
+                    <Badge
+                      variant="secondary"
+                      className="h-5 px-1.5 font-mono text-[11px] font-normal"
+                    >
                       {properties.type}
                     </Badge>
                   </PropertyRow>
@@ -69,12 +73,12 @@ export function NoteFixture({ item }: NoteFixtureProps) {
                 ) : null}
                 {properties.tags && properties.tags.length > 0 ? (
                   <PropertyRow label="Tags">
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-1">
                       {properties.tags.map((tag) => (
                         <Badge
                           key={tag}
                           variant="outline"
-                          className="font-normal"
+                          className="h-5 px-1.5 text-[11px] font-normal"
                         >
                           {tag}
                         </Badge>
@@ -91,7 +95,10 @@ export function NoteFixture({ item }: NoteFixtureProps) {
                 ) : null}
                 {properties.status ? (
                   <PropertyRow label="Status">
-                    <Badge variant="secondary" className="font-normal">
+                    <Badge
+                      variant="secondary"
+                      className="h-5 px-1.5 text-[11px] font-normal"
+                    >
                       {properties.status}
                     </Badge>
                   </PropertyRow>
@@ -112,26 +119,26 @@ export function NoteFixture({ item }: NoteFixtureProps) {
         ) : null}
 
         {body ? (
-          <div className="mt-8 space-y-4 text-base leading-relaxed text-foreground">
+          <div className="mt-5 space-y-3 text-sm leading-relaxed text-foreground">
             {body.paragraphs.map((paragraph, index) => (
               <p key={index} className="text-pretty">
                 {paragraph}
               </p>
             ))}
             {body.heading ? (
-              <h2 className="pt-2 text-lg font-semibold tracking-tight">
+              <h2 className="pt-1 text-sm font-semibold tracking-tight">
                 {body.heading}
               </h2>
             ) : null}
             {body.code ? (
-              <div className="overflow-hidden rounded-lg border bg-muted/50">
-                <div className="flex items-center justify-between border-b bg-muted/80 px-3 py-1.5 text-xs text-muted-foreground">
+              <div className="overflow-hidden rounded-md border bg-muted/40">
+                <div className="flex items-center justify-between border-b bg-muted/60 px-2.5 py-1 text-[10px] text-muted-foreground">
                   <span className="font-mono">convex/schema.ts</span>
                   <span className="uppercase tracking-wide">
                     {body.code.language}
                   </span>
                 </div>
-                <pre className="overflow-x-auto p-4 font-mono text-[13px] leading-relaxed text-foreground">
+                <pre className="overflow-x-auto p-3 font-mono text-[12px] leading-relaxed text-foreground">
                   <code>{body.code.content}</code>
                 </pre>
               </div>
