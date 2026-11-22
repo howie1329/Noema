@@ -81,9 +81,11 @@ function SidebarItemRow({
   return (
     <SidebarMenuItem>
       <SidebarMenuButton
+        size="sm"
         isActive={isActive}
         onClick={onSelect}
         render={<button type="button" />}
+        className="rounded-md px-2 [&_svg]:size-3.5"
       >
         <Icon />
         <span>{item.title}</span>
@@ -102,16 +104,16 @@ function SidebarItemList({
   onSelectItem: (itemId: string) => void
 }) {
   return (
-  <>
-    {itemIds.map((itemId) => (
-      <SidebarItemRow
-        key={itemId}
-        item={FIXTURE_ITEMS[itemId]}
-        isActive={focusedId === itemId}
-        onSelect={() => onSelectItem(itemId)}
-      />
-    ))}
-  </>
+    <>
+      {itemIds.map((itemId) => (
+        <SidebarItemRow
+          key={itemId}
+          item={FIXTURE_ITEMS[itemId]}
+          isActive={focusedId === itemId}
+          onSelect={() => onSelectItem(itemId)}
+        />
+      ))}
+    </>
   )
 }
 
@@ -124,10 +126,12 @@ function HomeModeContent({
 }) {
   return (
     <>
-      <SidebarGroup>
-        <SidebarGroupLabel>Favorites</SidebarGroupLabel>
+      <SidebarGroup className="py-1">
+        <SidebarGroupLabel className="h-6 px-2 text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
+          Favorites
+        </SidebarGroupLabel>
         <SidebarGroupContent>
-          <SidebarMenu>
+          <SidebarMenu className="gap-0.5">
             <SidebarItemList
               itemIds={FIXTURE_FAVORITE_IDS}
               focusedId={focusedId}
@@ -137,10 +141,12 @@ function HomeModeContent({
         </SidebarGroupContent>
       </SidebarGroup>
 
-      <SidebarGroup>
-        <SidebarGroupLabel>Projects</SidebarGroupLabel>
+      <SidebarGroup className="py-1">
+        <SidebarGroupLabel className="h-6 px-2 text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
+          Projects
+        </SidebarGroupLabel>
         <SidebarGroupContent>
-          <SidebarMenu>
+          <SidebarMenu className="gap-0.5">
             {FIXTURE_PROJECTS.map((project) => (
               <Collapsible
                 key={project.id}
@@ -150,28 +156,30 @@ function HomeModeContent({
                 <SidebarMenuItem>
                   <CollapsibleTrigger
                     className={cn(
-                      "flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-sm",
+                      "flex h-7 w-full items-center gap-1.5 rounded-md px-2 text-left text-xs",
                       "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                       "[&[data-panel-open]_svg.chevron]:rotate-90"
                     )}
                   >
-                    <ChevronRight className="chevron size-4 shrink-0 transition-transform" />
-                    <Folder className="size-4 shrink-0" />
+                    <ChevronRight className="chevron size-3.5 shrink-0 transition-transform" />
+                    <Folder className="size-3.5 shrink-0 text-muted-foreground" />
                     <span className="truncate">{project.name}</span>
                     {project.count != null ? (
-                      <span className="ml-auto text-xs text-muted-foreground tabular-nums">
+                      <span className="ml-auto text-[10px] text-muted-foreground tabular-nums">
                         {project.count}
                       </span>
                     ) : null}
                   </CollapsibleTrigger>
                   <CollapsibleContent>
-                    <SidebarMenuSub>
+                    <SidebarMenuSub className="mx-0 ml-3.5 gap-0.5 border-l border-sidebar-border px-0 pl-2">
                       {project.itemIds.map((itemId) => (
                         <SidebarMenuSubItem key={itemId}>
                           <SidebarMenuSubButton
+                            size="sm"
                             isActive={focusedId === itemId}
                             onClick={() => onSelectItem(itemId)}
                             render={<button type="button" />}
+                            className="h-7 rounded-md px-2 text-xs [&_svg]:size-3.5"
                           >
                             <span>{FIXTURE_ITEMS[itemId].title}</span>
                           </SidebarMenuSubButton>
@@ -186,10 +194,12 @@ function HomeModeContent({
         </SidebarGroupContent>
       </SidebarGroup>
 
-      <SidebarGroup>
-        <SidebarGroupLabel>Recent</SidebarGroupLabel>
+      <SidebarGroup className="py-1">
+        <SidebarGroupLabel className="h-6 px-2 text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
+          Recent
+        </SidebarGroupLabel>
         <SidebarGroupContent>
-          <SidebarMenu>
+          <SidebarMenu className="gap-0.5">
             <SidebarItemList
               itemIds={FIXTURE_RECENT_IDS}
               focusedId={focusedId}
@@ -210,22 +220,26 @@ function ChatsModeContent({
   onSelectItem: (itemId: string) => void
 }) {
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>Chats</SidebarGroupLabel>
+    <SidebarGroup className="py-1">
+      <SidebarGroupLabel className="h-6 px-2 text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
+        Chats
+      </SidebarGroupLabel>
       <SidebarGroupContent>
-        <SidebarMenu>
+        <SidebarMenu className="gap-0.5">
           {CHAT_ITEMS.map((item) => (
             <SidebarMenuItem key={item.id}>
               <SidebarMenuButton
+                size="sm"
                 isActive={focusedId === item.id}
                 onClick={() => onSelectItem(item.id)}
                 render={<button type="button" />}
+                className="h-auto min-h-7 items-start rounded-md px-2 py-1.5 [&_svg]:mt-0.5 [&_svg]:size-3.5"
               >
                 <MessageSquare />
-                <span className="flex flex-col items-start gap-0.5 overflow-hidden text-left">
-                  <span className="truncate w-full">{item.title}</span>
+                <span className="flex min-w-0 flex-col items-start gap-0 overflow-hidden text-left">
+                  <span className="w-full truncate text-xs">{item.title}</span>
                   {item.preview ? (
-                    <span className="truncate w-full text-xs font-normal text-muted-foreground">
+                    <span className="w-full truncate text-[10px] font-normal text-muted-foreground">
                       {item.preview}
                     </span>
                   ) : null}
@@ -247,10 +261,12 @@ function LibraryModeContent({
   onSelectItem: (itemId: string) => void
 }) {
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>Notes</SidebarGroupLabel>
+    <SidebarGroup className="py-1">
+      <SidebarGroupLabel className="h-6 px-2 text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
+        Notes
+      </SidebarGroupLabel>
       <SidebarGroupContent>
-        <SidebarMenu>
+        <SidebarMenu className="gap-0.5">
           {LIBRARY_ITEMS.map((item) => (
             <SidebarItemRow
               key={item.id}
@@ -280,23 +296,26 @@ export function AppSidebar({
 
   return (
     <SidebarProvider className="flex h-full min-h-0 w-full">
-      <Sidebar collapsible="none" className="h-full w-full border-0 bg-transparent">
-        <SidebarHeader className="gap-3 border-b pb-3">
-          <div className="flex items-center gap-2">
-            <span className="min-w-0 flex-1 truncate text-sm font-semibold">
+      <Sidebar
+        collapsible="none"
+        className="h-full w-full border-0 bg-transparent text-xs"
+      >
+        <SidebarHeader className="gap-2 border-b px-2 py-2">
+          <div className="flex items-center gap-0.5">
+            <span className="min-w-0 flex-1 truncate px-1 text-xs font-medium tracking-tight">
               {FIXTURE_WORKSPACE_NAME}
             </span>
             <Button
               type="button"
               variant="ghost"
               size="icon-sm"
-              className="relative shrink-0"
+              className="relative size-7 shrink-0 text-muted-foreground"
               aria-label="Notifications"
             >
-              <Bell className="size-4" />
+              <Bell className="size-3.5" />
               <Badge
                 variant="secondary"
-                className="pointer-events-none absolute -top-0.5 -right-0.5 size-4 justify-center rounded-full p-0 text-[10px]"
+                className="pointer-events-none absolute -top-0.5 -right-0.5 size-3.5 justify-center rounded-full p-0 text-[9px] leading-none"
               >
                 2
               </Badge>
@@ -305,55 +324,70 @@ export function AppSidebar({
               type="button"
               variant="ghost"
               size="icon-sm"
-              className="shrink-0"
+              className="size-7 shrink-0 text-muted-foreground"
               aria-label="New"
             >
-              <Plus className="size-4" />
+              <Plus className="size-3.5" />
             </Button>
             <Button
               type="button"
               variant="ghost"
               size="icon-sm"
-              className="shrink-0"
+              className="size-7 shrink-0 text-muted-foreground"
               onClick={onCollapse}
               aria-label="Collapse sidebar"
             >
-              <PanelLeftClose className="size-4" />
+              <PanelLeftClose className="size-3.5" />
             </Button>
           </div>
 
           <Tabs value={mode} onValueChange={handleModeChange}>
-            <TabsList className="grid h-8 w-full grid-cols-3">
-              <TabsTrigger value="home" className="gap-1.5 px-2 text-xs">
-                <Home className="size-3.5" />
+            <TabsList className="grid h-7 w-full grid-cols-3 p-0.5">
+              <TabsTrigger value="home" className="gap-1 px-1.5 text-[11px]">
+                <Home className="size-3" />
                 Home
               </TabsTrigger>
-              <TabsTrigger value="chats" className="gap-1.5 px-2 text-xs">
-                <MessageSquare className="size-3.5" />
+              <TabsTrigger value="chats" className="gap-1 px-1.5 text-[11px]">
+                <MessageSquare className="size-3" />
                 Chats
               </TabsTrigger>
-              <TabsTrigger value="library" className="gap-1.5 px-2 text-xs">
-                <BookOpen className="size-3.5" />
+              <TabsTrigger
+                value="library"
+                className="gap-1 px-1.5 text-[11px]"
+              >
+                <BookOpen className="size-3" />
                 Library
               </TabsTrigger>
             </TabsList>
           </Tabs>
 
-          <SidebarMenu>
+          <SidebarMenu className="gap-0.5">
             <SidebarMenuItem>
-              <SidebarMenuButton render={<button type="button" />}>
+              <SidebarMenuButton
+                size="sm"
+                render={<button type="button" />}
+                className="rounded-md px-2 text-muted-foreground [&_svg]:size-3.5"
+              >
                 <Search />
                 <span>Search</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton render={<button type="button" />}>
+              <SidebarMenuButton
+                size="sm"
+                render={<button type="button" />}
+                className="rounded-md px-2 [&_svg]:size-3.5"
+              >
                 <Sparkles className="text-violet-600 dark:text-violet-400" />
                 <span>Ask Noema</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton render={<button type="button" />}>
+              <SidebarMenuButton
+                size="sm"
+                render={<button type="button" />}
+                className="rounded-md px-2 text-muted-foreground [&_svg]:size-3.5"
+              >
                 <Plus />
                 <span>New tab</span>
               </SidebarMenuButton>
@@ -361,7 +395,7 @@ export function AppSidebar({
           </SidebarMenu>
         </SidebarHeader>
 
-        <SidebarContent>
+        <SidebarContent className="gap-0 px-1 py-1">
           {mode === "home" ? (
             <HomeModeContent
               focusedId={focusedId}
@@ -382,36 +416,36 @@ export function AppSidebar({
           ) : null}
         </SidebarContent>
 
-        <SidebarFooter className="border-t pt-2">
-          <div className="flex items-center justify-between gap-1 px-1">
+        <SidebarFooter className="border-t px-1.5 py-1.5">
+          <div className="flex items-center gap-0.5">
             <Button
               type="button"
               variant="ghost"
               size="icon-sm"
+              className="size-7 text-muted-foreground"
               aria-label="Trash"
             >
-              <Trash2 className="size-4" />
+              <Trash2 className="size-3.5" />
             </Button>
             <Button
               type="button"
               variant="ghost"
               size="icon-sm"
+              className="size-7 text-muted-foreground"
               aria-label="Appearance"
             >
-              <SunMoon className="size-4" />
+              <SunMoon className="size-3.5" />
             </Button>
             <Button
               type="button"
               variant="ghost"
               size="icon-sm"
+              className="ml-auto size-7 text-muted-foreground"
               aria-label="Settings"
             >
-              <Settings className="size-4" />
+              <Settings className="size-3.5" />
             </Button>
           </div>
-          <p className="px-1 text-[10px] leading-snug text-muted-foreground">
-            Click replaces · ⌥ adds pane · ⌘ new tab
-          </p>
         </SidebarFooter>
       </Sidebar>
     </SidebarProvider>
