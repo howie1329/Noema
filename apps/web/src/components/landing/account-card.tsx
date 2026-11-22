@@ -1,3 +1,4 @@
+import { useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
 
 import { Button } from "@workspace/ui/components/button"
@@ -16,22 +17,19 @@ type FieldErrors = {
   password?: string
 }
 
-const PREVIEW_NOTE = "This preview doesn't open an account."
-
 export function AccountCard() {
+  const navigate = useNavigate()
   const [mode, setMode] = useState<AccountMode>("sign-up")
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errors, setErrors] = useState<FieldErrors>({})
-  const [previewNote, setPreviewNote] = useState<string | null>(null)
 
   const isSignUp = mode === "sign-up"
 
   function handleModeChange(next: string) {
     setMode(next === "sign-in" ? "sign-in" : "sign-up")
     setErrors({})
-    setPreviewNote(null)
   }
 
   function validate(): FieldErrors {
@@ -52,12 +50,14 @@ export function AccountCard() {
     event.preventDefault()
     const next = validate()
     setErrors(next)
-    setPreviewNote(Object.keys(next).length === 0 ? PREVIEW_NOTE : null)
+    if (Object.keys(next).length === 0) {
+      navigate({ to: "/home" })
+    }
   }
 
   function handleGoogle() {
     setErrors({})
-    setPreviewNote(PREVIEW_NOTE)
+    navigate({ to: "/home" })
   }
 
   return (
@@ -105,7 +105,6 @@ export function AccountCard() {
               onChange={(value) => {
                 setName(value)
                 setErrors((current) => ({ ...current, name: undefined }))
-                setPreviewNote(null)
               }}
             />
           ) : null}
@@ -120,7 +119,6 @@ export function AccountCard() {
             onChange={(value) => {
               setEmail(value)
               setErrors((current) => ({ ...current, email: undefined }))
-              setPreviewNote(null)
             }}
           />
           <Field
@@ -133,22 +131,13 @@ export function AccountCard() {
             onChange={(value) => {
               setPassword(value)
               setErrors((current) => ({ ...current, password: undefined }))
-              setPreviewNote(null)
             }}
           />
           <Button type="submit" className="mt-1 h-11 w-full rounded-lg!">
             {isSignUp ? "Create account" : "Sign in"}
           </Button>
         </form>
-        {previewNote ? (
-          <p className="text-center text-sm text-muted-foreground" role="status">
-            {previewNote}
-          </p>
-        ) : (
-          <p className="text-center text-xs text-muted-foreground">
-            Free, with limits.
-          </p>
-        )}
+        <p className="text-center text-xs text-muted-foreground">Free, with limits.</p>
       </div>
     </div>
   )
