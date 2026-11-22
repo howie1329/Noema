@@ -9,12 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as MarketingRouteRouteImport } from './routes/_marketing/route'
+import { Route as AppHomeRouteImport } from './routes/_app/home'
 import { Route as MarketingIndexRouteImport } from './routes/_marketing/index'
 
+const AppRouteRoute = AppRouteRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MarketingRouteRoute = MarketingRouteRouteImport.update({
   id: '/_marketing',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppHomeRoute = AppHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const MarketingIndexRoute = MarketingIndexRouteImport.update({
   id: '/',
@@ -24,35 +35,54 @@ const MarketingIndexRoute = MarketingIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof MarketingIndexRoute
+  '/home': typeof AppHomeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof MarketingIndexRoute
+  '/home': typeof AppHomeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_app': typeof AppRouteRouteWithChildren
   '/_marketing': typeof MarketingRouteRouteWithChildren
+  '/_app/home': typeof AppHomeRoute
   '/_marketing/': typeof MarketingIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/home'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_marketing' | '/_marketing/'
+  to: '/' | '/home'
+  id: '__root__' | '/_app' | '/_marketing' | '/_app/home' | '/_marketing/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  AppRouteRoute: typeof AppRouteRouteWithChildren
   MarketingRouteRoute: typeof MarketingRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_marketing': {
       id: '/_marketing'
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof MarketingRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_app/home': {
+      id: '/_app/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof AppHomeRouteImport
+      parentRoute: typeof AppRouteRoute
     }
     '/_marketing/': {
       id: '/_marketing/'
@@ -63,6 +93,18 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AppRouteRouteChildren {
+  AppHomeRoute: typeof AppHomeRoute
+}
+
+const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppHomeRoute: AppHomeRoute,
+}
+
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
+  AppRouteRouteChildren,
+)
 
 interface MarketingRouteRouteChildren {
   MarketingIndexRoute: typeof MarketingIndexRoute
@@ -77,6 +119,7 @@ const MarketingRouteRouteWithChildren = MarketingRouteRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
+  AppRouteRoute: AppRouteRouteWithChildren,
   MarketingRouteRoute: MarketingRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
