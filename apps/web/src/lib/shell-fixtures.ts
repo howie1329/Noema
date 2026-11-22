@@ -1,5 +1,7 @@
 export type ShellMode = "home" | "chats" | "library"
 
+export type OpenTab = { id: string; itemId: string }
+
 export type FixtureKind = "note" | "chat"
 
 export type FixtureItem = {
