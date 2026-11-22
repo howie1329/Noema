@@ -4,6 +4,7 @@ import { AppSidebar } from "@/components/shell/app-sidebar"
 import { MainArea } from "@/components/shell/main-area"
 import {
   DEFAULT_FOCUSED_ID,
+  FIXTURE_ITEMS,
   type OpenTab,
   type ShellMode,
 } from "@/lib/shell-fixtures"
@@ -76,6 +77,8 @@ export function WorkspaceShell() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [toggleSidebar])
 
+  const focusedItem = FIXTURE_ITEMS[focusedId] ?? FIXTURE_ITEMS[DEFAULT_FOCUSED_ID]
+
   return (
     <div className="flex h-dvh gap-2 p-2">
       {sidebarOpen ? (
@@ -94,7 +97,7 @@ export function WorkspaceShell() {
           sidebarOpen={sidebarOpen}
           onExpandSidebar={expandSidebar}
           openTabs={openTabs}
-          focusedId={focusedId}
+          focusedItem={focusedItem}
           onSelectTab={selectTab}
           onCloseTab={closeTab}
         />

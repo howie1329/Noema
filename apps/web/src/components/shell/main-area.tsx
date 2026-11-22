@@ -20,8 +20,11 @@ import {
 import { ScrollArea, ScrollBar } from "@workspace/ui/components/scroll-area"
 import { cn } from "@workspace/ui/lib/utils"
 
+import { ChatStub } from "@/components/shell/chat-stub"
+import { NoteFixture } from "@/components/shell/note-fixture"
 import {
   FIXTURE_ITEMS,
+  type FixtureItem,
   type OpenTab,
 } from "@/lib/shell-fixtures"
 
@@ -29,7 +32,7 @@ type MainAreaProps = {
   sidebarOpen: boolean
   onExpandSidebar: () => void
   openTabs: OpenTab[]
-  focusedId: string
+  focusedItem: FixtureItem
   onSelectTab: (itemId: string) => void
   onCloseTab: (itemId: string) => void
 }
@@ -38,11 +41,11 @@ export function MainArea({
   sidebarOpen,
   onExpandSidebar,
   openTabs,
-  focusedId,
+  focusedItem,
   onSelectTab,
   onCloseTab,
 }: MainAreaProps) {
-  const focusedItem = FIXTURE_ITEMS[focusedId]
+  const focusedId = focusedItem.id
   const breadcrumbSegments =
     focusedItem.breadcrumbs ?? [focusedItem.title]
 
@@ -151,13 +154,12 @@ export function MainArea({
         </div>
       </header>
 
-      <div className="flex flex-1 flex-col items-center justify-center gap-2 p-6 text-center">
-        <p className="text-lg font-medium text-foreground">
-          {focusedItem.title}
-        </p>
-        <p className="text-sm text-muted-foreground">
-          Note and chat content arrives in the next task.
-        </p>
+      <div className="flex min-h-0 flex-1 flex-col">
+        {focusedItem.kind === "chat" ? (
+          <ChatStub item={focusedItem} />
+        ) : (
+          <NoteFixture item={focusedItem} />
+        )}
       </div>
     </div>
   )
