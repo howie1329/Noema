@@ -61,39 +61,39 @@ export function AccountCard() {
   }
 
   return (
-    <div className="w-full rounded-2xl border border-border/80 bg-card px-6 py-6 shadow-sm sm:px-7 sm:py-7">
+    <div className="w-full rounded-xl border border-border/80 bg-card px-5 py-5 shadow-sm">
       <Tabs value={mode} onValueChange={handleModeChange}>
-        <TabsList className="mb-5 grid h-10 w-full grid-cols-2 rounded-lg! bg-zinc-100 p-1 dark:bg-zinc-900">
+        <TabsList className="mb-4 grid h-8 w-full grid-cols-2 rounded-md! bg-zinc-100 p-0.5 dark:bg-zinc-900">
           <TabsTrigger
             value="sign-in"
-            className="rounded-md! data-active:bg-white data-active:shadow-sm dark:data-active:bg-zinc-800"
+            className="rounded-md! text-xs data-active:bg-white data-active:shadow-sm dark:data-active:bg-zinc-800"
           >
             Sign in
           </TabsTrigger>
           <TabsTrigger
             value="sign-up"
-            className="rounded-md! data-active:bg-white data-active:shadow-sm dark:data-active:bg-zinc-800"
+            className="rounded-md! text-xs data-active:bg-white data-active:shadow-sm dark:data-active:bg-zinc-800"
           >
             Sign up
           </TabsTrigger>
         </TabsList>
       </Tabs>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         <Button
           type="button"
           variant="outline"
-          className="h-10 w-full rounded-lg! bg-card"
+          className="h-9 w-full rounded-md! bg-card text-xs"
           onClick={handleGoogle}
         >
           <GoogleMark />
           Continue with Google
         </Button>
-        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+        <div className="flex items-center gap-3 text-[10px] text-muted-foreground">
           <span className="h-px flex-1 bg-border" />
           or
           <span className="h-px flex-1 bg-border" />
         </div>
-        <form className="flex flex-col gap-3.5" onSubmit={handleSubmit} noValidate>
+        <form className="flex flex-col gap-3" onSubmit={handleSubmit} noValidate>
           {isSignUp ? (
             <Field
               id="account-name"
@@ -133,11 +133,13 @@ export function AccountCard() {
               setErrors((current) => ({ ...current, password: undefined }))
             }}
           />
-          <Button type="submit" className="mt-1 h-11 w-full rounded-lg!">
+          <Button type="submit" className="mt-0.5 h-9 w-full rounded-md! text-xs">
             {isSignUp ? "Create account" : "Sign in"}
           </Button>
         </form>
-        <p className="text-center text-xs text-muted-foreground">Free, with limits.</p>
+        <p className="text-center text-[10px] text-muted-foreground">
+          Free, with limits.
+        </p>
       </div>
     </div>
   )
@@ -165,8 +167,8 @@ function Field({
   placeholder,
 }: FieldProps) {
   return (
-    <div className="flex flex-col gap-1.5">
-      <Label htmlFor={id} className="text-sm font-medium">
+    <div className="flex flex-col gap-1">
+      <Label htmlFor={id} className="text-xs font-medium">
         {label}
       </Label>
       <Input
@@ -179,13 +181,17 @@ function Field({
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${id}-error` : undefined}
         className={cn(
-          "h-10 rounded-lg border-transparent bg-zinc-100 px-3 dark:bg-zinc-900",
+          "h-9 rounded-md border-transparent bg-zinc-100 px-2.5 text-xs dark:bg-zinc-900",
           error && "border-destructive"
         )}
         onChange={(event) => onChange(event.target.value)}
       />
       {error ? (
-        <p id={`${id}-error`} className="text-sm text-destructive" role="alert">
+        <p
+          id={`${id}-error`}
+          className="text-[11px] text-destructive"
+          role="alert"
+        >
           {error}
         </p>
       ) : null}
@@ -195,7 +201,7 @@ function Field({
 
 function GoogleMark() {
   return (
-    <svg width="16" height="16" viewBox="0 0 18 18" aria-hidden>
+    <svg width="14" height="14" viewBox="0 0 18 18" aria-hidden>
       <path
         fill="#4285F4"
         d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"

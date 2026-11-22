@@ -40,15 +40,15 @@ export function ModeToggle({
     <Button
       type="button"
       variant={variant}
-      size="icon"
-      className={cn("size-9 shrink-0", className)}
+      size="icon-sm"
+      className={cn("size-7 shrink-0 text-muted-foreground", className)}
       onClick={handleToggle}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {isDark ? (
-        <Moon className="size-[1.15rem]" aria-hidden />
+        <Moon className="size-3.5" aria-hidden />
       ) : (
-        <Sun className="size-[1.15rem]" aria-hidden />
+        <Sun className="size-3.5" aria-hidden />
       )}
     </Button>
   )
