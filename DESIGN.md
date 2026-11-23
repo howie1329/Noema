@@ -1,46 +1,81 @@
-# Noema — design system (marketing)
+# Noema — design system
 
 <!-- impeccable:design-schema 1 -->
 
 ## World
 
-**Quiet product marketing.** Light gray canvas, one screen, black text, a white account card. The page is the invitation to create an account. No feature grid, no product screenshot, no waitlist.
+**Quiet product.** Zinc canvas, black/white type, hairline borders, small shadows. Violet is reserved for AI affordances only. Inter Variable throughout.
+
+Two surfaces share one density language; scale differs by job:
+
+| Surface | Mode | Job |
+| --- | --- | --- |
+| Marketing `/` | Persuade | Invite someone to create an account |
+| App `/home` | Operate | Daily workspace chrome |
+
+## Shared density (Operate baseline)
+
+Use these sizes across **app shell** and as the quiet reference for marketing chrome (nav, card controls). Marketing headline may sit one step larger; it must not return to oversized display type.
+
+| Role | Pattern |
+| --- | --- |
+| Chrome base | `text-xs` |
+| Icons (chrome) | `size-3.5`, hit target `size-7`, muted unless active / AI |
+| List / menu rows | ~`h-7`, `rounded-md`, tight `px-2`, `gap-0.5` |
+| Section labels | `text-[11px]` uppercase + tracking, muted |
+| Meta / captions | `text-[10px]`–`11px` |
+| Document title | `text-xl font-semibold tracking-tight` |
+| Body | `text-sm leading-relaxed` |
+| Subhead | `text-sm font-semibold` |
+| Compact badges | `h-5`, `text-[11px]` |
+| AI | Violet only (e.g. Ask Noema, AI checklist marks) |
+
+**Do not:** default sidebar rows at `h-9`/`text-sm` with `rounded-xl`; note titles at `text-2xl+`; footer shortcut captions; violet on non-AI chrome.
 
 ## Color
 
 | Role | Usage |
 | --- | --- |
-| Canvas | `zinc-100` in light, `zinc-950` in dark |
+| Canvas | `zinc-100` light, `zinc-950` dark |
 | Text | `foreground` / `muted-foreground` |
-| Card | `card` on the canvas, hairline border, small shadow |
+| Card | `card` on canvas, hairline border, small shadow |
 | Primary CTA | `primary` — black in light, white in dark |
-| AI marks | Violet wells only on AI lines in the checklist |
-| Privacy mark | Neutral well. Violet means AI. |
+| AI marks | Violet wells / icons only |
+| Privacy / neutral marks | Zinc wells — never violet |
 
 ## Typography
 
 - **Sans:** Inter Variable (`packages/ui` globals)
-- **Headline:** ~2.25–3rem, weight 600, tracking −0.03em, left aligned
-- **Body:** 1rem, muted, narrow measure under the headline
+- **Marketing headline:** ~`text-3xl` / `sm:text-4xl`, weight 600, tracking −0.03em (brand-supporting, not billboard)
+- **Marketing body:** `text-sm`, muted, narrow measure
+- **App note title / body:** see Shared density
 
-## Layout (marketing page `/`)
+## Marketing page `/`
 
-1. **Header:** wordmark left; feature names (Notes, Auto-linking, Chat, Privacy) that will link out later and do not navigate yet; theme toggle on the right. No Sign in in the header.
-2. **One screen:** left column is pronunciation, headline, one sentence, three checklist lines. Right column is the account card (Sign in / Sign up).
-3. **No footer.** Nothing below this screen.
-4. **Mobile:** the same content stacks. Feature names wrap under the wordmark.
+1. **Header:** wordmark left; feature names (Notes, Auto-linking, Chat, Privacy) that do not navigate yet; theme toggle right. No Sign in in the header. Compact: `text-xs` links, `size-7` toggle, tight vertical padding.
+2. **One screen:** left — brand row (mark + Noema + pronunciation), headline, one sentence, three checklist lines with small icon wells. Right — account card.
+3. **No footer.**
+4. **Mobile:** content stacks; feature names wrap under the wordmark.
 
-## Account card
+### Account card
 
-- Opens on Sign up. Tabs switch the card. They do not change the URL.
-- Continue with Google, then name (sign up only), email, and password. No GitHub. No confirm-password field.
-- **Create account** / **Sign in** validate the fields and stay on the page. A filled form says the preview does not open an account.
-- Caption when idle: “Free, with limits.”
+- Opens on Sign up. Tabs switch the card; they do not change the URL.
+- Continue with Google, then name (sign up only), email, password. No GitHub. No confirm-password.
+- Valid submit / Google navigates to `/home` (UI preview until Clerk).
+- Caption: “Free, with limits.”
+- Density: `rounded-xl`, compact tabs (`h-8`), inputs/buttons ~`h-9`, labels `text-xs`.
+
+## App shell `/home`
+
+- Zinc canvas; **sidebar** + **main** as floating `rounded-xl` cards with ~8px gap (chat panel later).
+- Sidebar: Home / Chats / Library, Search / Ask Noema / New tab, Favorites / Projects / Recent, compact footer icons (no shortcut caption).
+- Main: light tabs, breadcrumbs, Saved + muted actions, note fixture (properties + body) or chat stub.
+- Reading column ~720px. Collapse via control + `⌘\`.
 
 ## Motion
 
-No entrance animation. Hover and focus only. `prefers-reduced-motion` stays respected globally.
+Hover and focus only on marketing. App shell: functional motion only (collapse, collapsibles). Respect `prefers-reduced-motion`.
 
 ## Auth
 
-Account creation and sign-in live on the Marketing page card until Clerk is wired. There is no separate `/auth` route.
+Account creation and sign-in live on the Marketing page card until Clerk is wired. No separate `/auth` route.

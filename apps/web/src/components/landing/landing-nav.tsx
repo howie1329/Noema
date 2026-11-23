@@ -28,31 +28,31 @@ function FeatureLinks({ className }: { className?: string }) {
 }
 
 const featureLinkClass =
-  "rounded-sm text-sm text-foreground/80 transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/40 focus-visible:outline-none"
+  "rounded-sm text-xs text-foreground/75 transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/40 focus-visible:outline-none"
 
 export function LandingNav() {
   return (
     <header className="bg-zinc-100 dark:bg-zinc-950">
       <h1 className="sr-only">Noema</h1>
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-[1fr_auto] items-center gap-4 px-4 py-4 sm:px-6 md:grid-cols-[1fr_auto_1fr] lg:px-8">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-[1fr_auto] items-center gap-3 px-4 py-2.5 sm:px-6 md:grid-cols-[1fr_auto_1fr] lg:px-8">
         <Link
           to="/"
-          className="flex items-center gap-2.5 justify-self-start font-semibold tracking-tight text-foreground"
+          className="flex items-center gap-2 justify-self-start text-xs font-medium tracking-tight text-foreground"
         >
-          <BrandMark />
+          <BrandMark className="size-6 text-[0.65rem]" />
           Noema
         </Link>
         <nav
-          className="hidden items-center gap-6 md:flex"
+          className="hidden items-center gap-4 md:flex"
           aria-label="Features"
         >
           <FeatureLinks className={featureLinkClass} />
         </nav>
         <div className="justify-self-end">
-          <ModeToggle variant="ghost" />
+          <ModeToggle variant="ghost" className="size-7" />
         </div>
         <nav
-          className="col-span-2 flex gap-4 overflow-x-auto md:hidden"
+          className="col-span-2 flex gap-3 overflow-x-auto md:hidden"
           aria-label="Features"
         >
           <FeatureLinks className={`${featureLinkClass} shrink-0`} />

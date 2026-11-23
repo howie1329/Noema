@@ -25,33 +25,36 @@ const POINTS = [
 
 export function Hero() {
   return (
-    <section className="flex flex-1 items-center px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-20">
+    <section className="flex flex-1 items-center px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
         <div className="max-w-xl">
-          <div className="flex items-center gap-2.5">
-            <BrandMark className="size-8 text-xs" />
-            <span className="font-semibold tracking-tight">Noema</span>
-            <span className="text-sm text-muted-foreground">no-EE-muh</span>
+          <div className="flex items-center gap-2">
+            <BrandMark className="size-6 text-[0.65rem]" />
+            <span className="text-sm font-semibold tracking-tight">Noema</span>
+            <span className="text-xs text-muted-foreground">no-EE-muh</span>
           </div>
-          <h2 className="mt-6 text-4xl font-semibold tracking-[-0.03em] text-balance text-foreground sm:text-5xl sm:leading-[1.08]">
+          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-balance text-foreground sm:text-4xl sm:leading-[1.1]">
             An assistant that knows your notes, and notes that can think.
           </h2>
-          <p className="mt-4 max-w-md text-base leading-relaxed text-pretty text-muted-foreground">
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-pretty text-muted-foreground">
             Write and ask in one place. The assistant starts from your notes
             instead of a blank page, and it never changes a word without you.
           </p>
-          <ul className="mt-8 space-y-3.5">
+          <ul className="mt-6 space-y-2.5">
             {POINTS.map((point) => (
-              <li key={point.label} className="flex items-center gap-3 text-sm">
+              <li
+                key={point.label}
+                className="flex items-center gap-2.5 text-xs text-foreground"
+              >
                 <span
                   className={cn(
-                    "flex size-7 shrink-0 items-center justify-center rounded-full",
+                    "flex size-6 shrink-0 items-center justify-center rounded-full",
                     point.ai
                       ? "bg-violet-100 text-violet-700 dark:bg-violet-400/15 dark:text-violet-300"
                       : "bg-zinc-200 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"
                   )}
                 >
-                  <point.icon className="size-3.5" aria-hidden />
+                  <point.icon className="size-3" aria-hidden />
                 </span>
                 {point.label}
               </li>
