@@ -38,7 +38,7 @@ export function NoteFixture({ item }: NoteFixtureProps) {
   return (
     <ScrollArea className="h-full min-h-0 flex-1">
       <article className="mx-auto w-full max-w-[720px] px-5 py-5">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+        <h1 className="prose-noema-heading text-[1.875rem] leading-[1.2] text-foreground">
           {item.title}
         </h1>
 
@@ -60,7 +60,7 @@ export function NoteFixture({ item }: NoteFixtureProps) {
                   <PropertyRow label="Type">
                     <Badge
                       variant="secondary"
-                      className="h-5 px-1.5 font-mono text-[11px] font-normal"
+                      className="h-5 px-1.5 font-mono text-xs font-normal"
                     >
                       {properties.type}
                     </Badge>
@@ -78,7 +78,7 @@ export function NoteFixture({ item }: NoteFixtureProps) {
                         <Badge
                           key={tag}
                           variant="outline"
-                          className="h-5 px-1.5 text-[11px] font-normal"
+                          className="h-5 px-1.5 text-xs font-normal"
                         >
                           {tag}
                         </Badge>
@@ -97,7 +97,7 @@ export function NoteFixture({ item }: NoteFixtureProps) {
                   <PropertyRow label="Status">
                     <Badge
                       variant="secondary"
-                      className="h-5 px-1.5 text-[11px] font-normal"
+                      className="h-5 px-1.5 text-xs font-normal"
                     >
                       {properties.status}
                     </Badge>
@@ -119,20 +119,18 @@ export function NoteFixture({ item }: NoteFixtureProps) {
         ) : null}
 
         {body ? (
-          <div className="mt-5 space-y-3 text-sm leading-relaxed text-foreground">
+          <div className="prose-noema mt-6 space-y-4 text-foreground">
             {body.paragraphs.map((paragraph, index) => (
-              <p key={index} className="text-pretty">
-                {paragraph}
-              </p>
+              <p key={index}>{paragraph}</p>
             ))}
             {body.heading ? (
-              <h2 className="pt-1 text-sm font-semibold tracking-tight">
+              <h2 className="prose-noema-heading pt-2 text-[1.25rem] leading-snug">
                 {body.heading}
               </h2>
             ) : null}
             {body.code ? (
               <div className="overflow-hidden rounded-md border bg-muted/40">
-                <div className="flex items-center justify-between border-b bg-muted/60 px-2.5 py-1 text-[10px] text-muted-foreground">
+                <div className="flex items-center justify-between border-b bg-muted/60 px-2.5 py-1 font-sans text-xs text-muted-foreground">
                   <span className="font-mono">convex/schema.ts</span>
                   <span className="uppercase tracking-wide">
                     {body.code.language}

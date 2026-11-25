@@ -4,7 +4,7 @@
 
 ## World
 
-**Quiet product.** Zinc canvas, black/white type, hairline borders, small shadows. Violet is reserved for AI affordances only. Inter Variable throughout.
+**Quiet product.** Zinc canvas, black/white type, hairline borders, small shadows. Violet is reserved for AI affordances only. **Inter** for UI chrome; **Source Serif 4** for display type and long-form prose (Lane A — editorial calm).
 
 Two surfaces share one density language; scale differs by job:
 
@@ -22,12 +22,12 @@ Use these sizes across **app shell** and as the quiet reference for marketing ch
 | Chrome base | `text-xs` |
 | Icons (chrome) | `size-3.5`, hit target `size-7`, muted unless active / AI |
 | List / menu rows | ~`h-7`, `rounded-md`, tight `px-2`, `gap-0.5` |
-| Section labels | `text-[11px]` uppercase + tracking, muted |
-| Meta / captions | `text-[10px]`–`11px` |
-| Document title | `text-xl font-semibold tracking-tight` |
-| Body | `text-sm leading-relaxed` |
+| Section labels | `text-xs` uppercase + tracking, muted |
+| Meta / captions | `text-xs` (12px floor — no 10px chrome) |
+| Document title | `prose-noema-heading` ~`1.875rem` |
+| Body (notes) | `prose-noema` — 17px / 1.7 leading, serif |
 | Subhead | `text-sm font-semibold` |
-| Compact badges | `h-5`, `text-[11px]` |
+| Compact badges | `h-5`, `text-xs` |
 | AI | Violet only (e.g. Ask Noema, AI checklist marks) |
 
 **Do not:** default sidebar rows at `h-9`/`text-sm` with `rounded-xl`; note titles at `text-2xl+`; footer shortcut captions; violet on non-AI chrome.
@@ -45,10 +45,12 @@ Use these sizes across **app shell** and as the quiet reference for marketing ch
 
 ## Typography
 
-- **Sans:** Inter Variable (`packages/ui` globals)
-- **Marketing headline:** ~`text-3xl` / `sm:text-4xl`, weight 600, tracking −0.03em (brand-supporting, not billboard)
-- **Marketing body:** `text-sm`, muted, narrow measure
-- **App note title / body:** see Shared density
+- **UI sans:** Inter Variable (`packages/ui` globals)
+- **Display / prose serif:** Source Serif 4 Variable — `font-heading`, `prose-noema`, `prose-noema-heading` utilities
+- **Marketing headline:** serif display, ~`text-3xl` / `sm:text-4xl`
+- **Marketing body:** Inter `text-sm`, muted, narrow measure
+- **App note title / body:** serif scale via `prose-noema*`; shell stays Inter
+- **Editor pane:** `bg-editor` (slightly lifted from card in dark mode)
 
 ## Marketing page `/`
 

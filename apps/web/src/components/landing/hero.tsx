@@ -33,7 +33,7 @@ export function Hero() {
             <span className="text-sm font-semibold tracking-tight">Noema</span>
             <span className="text-xs text-muted-foreground">no-EE-muh</span>
           </div>
-          <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-balance text-foreground sm:text-4xl sm:leading-[1.1]">
+          <h2 className="prose-noema-heading mt-4 text-3xl sm:text-4xl sm:leading-[1.12] text-foreground">
             An assistant that knows your notes, and notes that can think.
           </h2>
           <p className="mt-3 max-w-md text-sm leading-relaxed text-pretty text-muted-foreground">
