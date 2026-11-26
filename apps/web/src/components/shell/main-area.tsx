@@ -42,8 +42,8 @@ export function MainArea({
 
   return (
     <div className="flex h-full min-h-0 flex-col text-xs">
-      <header className="grid h-11 shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b border-border/50 px-2.5">
-        <div className="flex min-w-0 items-center gap-2">
+      <header className="flex h-11 shrink-0 items-center justify-between gap-2 border-b border-border/50 px-2.5">
+        <div className="flex min-w-0 flex-1 items-center gap-2">
           {!sidebarOpen ? (
             <Button
               variant="ghost"
@@ -75,7 +75,7 @@ export function MainArea({
           >
             <ChevronRight className="size-3.5" />
           </Button>
-          <ScrollArea className="max-w-[12rem] min-w-0 whitespace-nowrap sm:max-w-[16rem]">
+          <ScrollArea className="min-w-0 flex-1 whitespace-nowrap">
             <div className="flex items-center gap-1 pr-1">
               {openTabs.map((tab) => {
                 const item = FIXTURE_ITEMS[tab.itemId]
@@ -88,7 +88,7 @@ export function MainArea({
                     className={cn(
                       "group flex h-6 max-w-[8.5rem] shrink-0 items-center gap-0.5 rounded-full border px-2 text-[11px]",
                       isActive
-                        ? "border-border bg-muted/80 text-foreground"
+                        ? "border-border bg-muted font-medium text-foreground"
                         : "border-transparent text-muted-foreground hover:bg-muted/40 hover:text-foreground"
                     )}
                   >
@@ -125,11 +125,7 @@ export function MainArea({
           </ScrollArea>
         </div>
 
-        <h1 className="max-w-[min(40vw,14rem)] truncate px-2 text-center text-sm font-medium tracking-tight">
-          {focusedItem.title}
-        </h1>
-
-        <div className="flex items-center justify-end gap-0.5">
+        <div className="flex shrink-0 items-center justify-end gap-0.5">
           <Badge
             variant="secondary"
             className="hidden h-5 px-1.5 text-[11px] font-normal sm:inline-flex"
