@@ -39,7 +39,7 @@ export function LandingNav() {
           to="/"
           className="flex items-center gap-2 justify-self-start text-xs font-medium tracking-tight text-foreground"
         >
-          <BrandMark className="size-6 text-[0.65rem]" />
+          <BrandMark className="h-6 w-6" />
           Noema
         </Link>
         <nav

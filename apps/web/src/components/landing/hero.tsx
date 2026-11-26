@@ -29,7 +29,7 @@ export function Hero() {
       <div className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
         <div className="max-w-xl">
           <div className="flex items-center gap-2">
-            <BrandMark className="size-6 text-[0.65rem]" />
+            <BrandMark className="h-6 w-6" />
             <span className="text-sm font-semibold tracking-tight">Noema</span>
             <span className="text-xs text-muted-foreground">no-EE-muh</span>
           </div>
