@@ -82,9 +82,8 @@ export function WorkspaceShell() {
     FIXTURE_ITEMS[focusedId] ?? FIXTURE_ITEMS[DEFAULT_FOCUSED_ID]
 
   return (
-    <div className="app-desktop-canvas flex min-h-dvh p-3 sm:p-4">
-      <div className="shell-unified-window mx-auto flex h-[calc(100dvh-1.5rem)] w-full max-w-[1600px] min-w-0 sm:h-[calc(100dvh-2rem)]">
-        {sidebarOpen ? (
+    <div className="shell-unified-window flex h-dvh w-full min-w-0">
+      {sidebarOpen ? (
           <aside
             className={cn(
               "shell-pane-inset w-60 shrink-0 border-r border-border/60 sm:w-64"
@@ -115,7 +114,6 @@ export function WorkspaceShell() {
             onClose={() => setChatOpen(false)}
           />
         ) : null}
-      </div>
     </div>
   )
 }

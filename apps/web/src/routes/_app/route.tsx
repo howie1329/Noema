@@ -6,7 +6,7 @@ export const Route = createFileRoute("/_app")({
 
 function AppLayout() {
   return (
-    <div className="min-h-dvh text-foreground">
+    <div className="h-dvh overflow-hidden text-foreground">
       <Outlet />
     </div>
   )
