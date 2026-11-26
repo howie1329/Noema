@@ -15,7 +15,6 @@ import { cn } from "@workspace/ui/lib/utils"
 
 import { ChatStub } from "@/components/shell/chat-stub"
 import { NoteFixture } from "@/components/shell/note-fixture"
-import { WindowDots } from "@/components/shell/window-dots"
 import {
   FIXTURE_ITEMS,
   type FixtureItem,
@@ -45,7 +44,6 @@ export function MainArea({
     <div className="flex h-full min-h-0 flex-col text-xs">
       <header className="grid h-11 shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b border-border/50 px-2.5">
         <div className="flex min-w-0 items-center gap-2">
-          <WindowDots />
           {!sidebarOpen ? (
             <Button
               variant="ghost"
