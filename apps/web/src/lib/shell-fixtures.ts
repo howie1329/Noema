@@ -210,3 +210,33 @@ export const FIXTURE_RECENT_IDS: string[] = [
 ]
 
 export const DEFAULT_FOCUSED_ID = "edges-schema"
+
+export type FixtureChatMessage = {
+  id: string
+  role: "user" | "assistant"
+  content: string
+}
+
+export const FIXTURE_CHAT_SUGGESTIONS = [
+  "Summarize",
+  "Find related notes",
+  "Draft next section",
+] as const
+
+export function getFixtureChatMessages(
+  focusedTitle: string
+): FixtureChatMessage[] {
+  return [
+    {
+      id: "u1",
+      role: "user",
+      content: `What's still unresolved in ${focusedTitle}?`,
+    },
+    {
+      id: "a1",
+      role: "assistant",
+      content:
+        "Three open threads: conflict rules when an edge is blocked after acceptance, the review queue layout for bulk accept, and whether rejected edges stay visible to the model as negative examples.",
+    },
+  ]
+}

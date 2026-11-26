@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useState } from "react"
 
 import { AppSidebar } from "@/components/shell/app-sidebar"
+import { ChatPanel } from "@/components/shell/chat-panel"
 import { MainArea } from "@/components/shell/main-area"
+import { cn } from "@workspace/ui/lib/utils"
+
 import {
   DEFAULT_FOCUSED_ID,
   FIXTURE_ITEMS,
@@ -9,15 +12,13 @@ import {
   type ShellMode,
 } from "@/lib/shell-fixtures"
 
-const cardChrome =
-  "flex min-h-0 flex-col overflow-hidden rounded-xl border bg-card shadow-sm"
-
 function createOpenTab(itemId: string): OpenTab {
   return { id: itemId, itemId }
 }
 
 export function WorkspaceShell() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [chatOpen, setChatOpen] = useState(true)
   const [mode, setMode] = useState<ShellMode>("home")
   const [focusedId, setFocusedId] = useState(DEFAULT_FOCUSED_ID)
   const [openTabs, setOpenTabs] = useState<OpenTab[]>(() => [
@@ -77,31 +78,42 @@ export function WorkspaceShell() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [toggleSidebar])
 
-  const focusedItem = FIXTURE_ITEMS[focusedId] ?? FIXTURE_ITEMS[DEFAULT_FOCUSED_ID]
+  const focusedItem =
+    FIXTURE_ITEMS[focusedId] ?? FIXTURE_ITEMS[DEFAULT_FOCUSED_ID]
 
   return (
-    <div className="flex h-dvh gap-2 p-2">
+    <div className="shell-unified-window flex h-dvh w-full min-w-0">
       {sidebarOpen ? (
-        <aside className={`w-64 shrink-0 ${cardChrome}`}>
-          <AppSidebar
-            mode={mode}
-            onModeChange={setMode}
-            focusedId={focusedId}
-            onSelectItem={selectItem}
-            onCollapse={toggleSidebar}
+          <aside
+            className={cn(
+              "shell-pane-inset w-60 shrink-0 border-r border-border/60 sm:w-64"
+            )}
+          >
+            <AppSidebar
+              mode={mode}
+              onModeChange={setMode}
+              focusedId={focusedId}
+              onSelectItem={selectItem}
+              onCollapse={toggleSidebar}
+            />
+          </aside>
+        ) : null}
+        <section className="shell-pane-inset min-w-0 flex-1">
+          <MainArea
+            sidebarOpen={sidebarOpen}
+            onExpandSidebar={expandSidebar}
+            openTabs={openTabs}
+            focusedItem={focusedItem}
+            onSelectTab={selectTab}
+            onCloseTab={closeTab}
           />
-        </aside>
-      ) : null}
-      <section className={`min-w-0 flex-1 ${cardChrome}`}>
-        <MainArea
-          sidebarOpen={sidebarOpen}
-          onExpandSidebar={expandSidebar}
-          openTabs={openTabs}
-          focusedItem={focusedItem}
-          onSelectTab={selectTab}
-          onCloseTab={closeTab}
-        />
-      </section>
+        </section>
+        {chatOpen ? (
+          <ChatPanel
+            focusedItem={focusedItem}
+            onClose={() => setChatOpen(false)}
+          />
+        ) : null}
     </div>
   )
 }
