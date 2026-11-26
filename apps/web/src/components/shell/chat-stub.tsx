@@ -14,7 +14,7 @@ export function ChatStub({ item }: ChatStubProps) {
       <div className="mx-auto flex w-full max-w-[720px] flex-col gap-3 px-5 py-5">
         <div className="flex items-center gap-1.5">
           <MessageSquare className="size-3.5 text-muted-foreground" />
-          <h1 className="text-xl font-semibold tracking-tight text-foreground">
+          <h1 className="prose-noema-heading text-[1.875rem] leading-[1.2] text-foreground">
             {item.title}
           </h1>
         </div>

@@ -127,7 +127,7 @@ function HomeModeContent({
   return (
     <>
       <SidebarGroup className="py-1">
-        <SidebarGroupLabel className="h-6 px-2 text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
+        <SidebarGroupLabel className="h-6 px-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">
           Favorites
         </SidebarGroupLabel>
         <SidebarGroupContent>
@@ -142,7 +142,7 @@ function HomeModeContent({
       </SidebarGroup>
 
       <SidebarGroup className="py-1">
-        <SidebarGroupLabel className="h-6 px-2 text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
+        <SidebarGroupLabel className="h-6 px-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">
           Projects
         </SidebarGroupLabel>
         <SidebarGroupContent>
@@ -165,7 +165,7 @@ function HomeModeContent({
                     <Folder className="size-3.5 shrink-0 text-muted-foreground" />
                     <span className="truncate">{project.name}</span>
                     {project.count != null ? (
-                      <span className="ml-auto text-[10px] text-muted-foreground tabular-nums">
+                      <span className="ml-auto text-xs text-muted-foreground tabular-nums">
                         {project.count}
                       </span>
                     ) : null}
@@ -195,7 +195,7 @@ function HomeModeContent({
       </SidebarGroup>
 
       <SidebarGroup className="py-1">
-        <SidebarGroupLabel className="h-6 px-2 text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
+        <SidebarGroupLabel className="h-6 px-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">
           Recent
         </SidebarGroupLabel>
         <SidebarGroupContent>
@@ -221,7 +221,7 @@ function ChatsModeContent({
 }) {
   return (
     <SidebarGroup className="py-1">
-      <SidebarGroupLabel className="h-6 px-2 text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
+      <SidebarGroupLabel className="h-6 px-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">
         Chats
       </SidebarGroupLabel>
       <SidebarGroupContent>
@@ -239,7 +239,7 @@ function ChatsModeContent({
                 <span className="flex min-w-0 flex-col items-start gap-0 overflow-hidden text-left">
                   <span className="w-full truncate text-xs">{item.title}</span>
                   {item.preview ? (
-                    <span className="w-full truncate text-[10px] font-normal text-muted-foreground">
+                    <span className="w-full truncate text-xs font-normal text-muted-foreground">
                       {item.preview}
                     </span>
                   ) : null}
@@ -262,7 +262,7 @@ function LibraryModeContent({
 }) {
   return (
     <SidebarGroup className="py-1">
-      <SidebarGroupLabel className="h-6 px-2 text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
+      <SidebarGroupLabel className="h-6 px-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">
         Notes
       </SidebarGroupLabel>
       <SidebarGroupContent>
@@ -343,17 +343,17 @@ export function AppSidebar({
 
           <Tabs value={mode} onValueChange={handleModeChange}>
             <TabsList className="grid h-7 w-full grid-cols-3 p-0.5">
-              <TabsTrigger value="home" className="gap-1 px-1.5 text-[11px]">
+              <TabsTrigger value="home" className="gap-1 px-1.5 text-xs">
                 <Home className="size-3" />
                 Home
               </TabsTrigger>
-              <TabsTrigger value="chats" className="gap-1 px-1.5 text-[11px]">
+              <TabsTrigger value="chats" className="gap-1 px-1.5 text-xs">
                 <MessageSquare className="size-3" />
                 Chats
               </TabsTrigger>
               <TabsTrigger
                 value="library"
-                className="gap-1 px-1.5 text-[11px]"
+                className="gap-1 px-1.5 text-xs"
               >
                 <BookOpen className="size-3" />
                 Library

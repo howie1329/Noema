@@ -63,7 +63,7 @@ export function MainArea({
                 <div
                   key={tab.id}
                   className={cn(
-                    "group flex h-7 max-w-[10rem] shrink-0 items-center gap-1 rounded-t-md border border-b-0 px-1.5 text-[11px]",
+                    "group flex h-7 max-w-[10rem] shrink-0 items-center gap-1 rounded-t-md border border-b-0 px-1.5 text-xs",
                     isActive
                       ? "border-border bg-card text-foreground shadow-xs"
                       : "border-transparent bg-transparent text-muted-foreground hover:bg-muted/50 hover:text-foreground"
@@ -117,7 +117,7 @@ export function MainArea({
         ) : null}
 
         <Breadcrumb className="min-w-0 flex-1">
-          <BreadcrumbList className="flex-nowrap gap-1 overflow-hidden text-[11px] sm:gap-1.5">
+          <BreadcrumbList className="flex-nowrap gap-1 overflow-hidden text-xs sm:gap-1.5">
             {breadcrumbSegments.map((segment, index) => {
               const isLast = index === breadcrumbSegments.length - 1
               return (
@@ -127,7 +127,7 @@ export function MainArea({
                   ) : null}
                   <BreadcrumbItem className="min-w-0">
                     {isLast ? (
-                      <BreadcrumbPage className="truncate text-[11px] font-normal">
+                      <BreadcrumbPage className="truncate text-xs font-normal">
                         {segment}
                       </BreadcrumbPage>
                     ) : (
@@ -145,7 +145,7 @@ export function MainArea({
         <div className="flex shrink-0 items-center gap-0.5">
           <Badge
             variant="secondary"
-            className="h-5 px-1.5 text-[10px] font-normal"
+            className="h-5 px-1.5 text-xs font-normal"
           >
             Saved
           </Badge>
@@ -179,7 +179,7 @@ export function MainArea({
         </div>
       </header>
 
-      <div className="flex min-h-0 flex-1 flex-col">
+      <div className="flex min-h-0 flex-1 flex-col bg-editor">
         {focusedItem.kind === "chat" ? (
           <ChatStub item={focusedItem} />
         ) : (
