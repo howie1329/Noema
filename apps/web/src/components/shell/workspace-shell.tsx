@@ -12,9 +12,6 @@ import {
   type ShellMode,
 } from "@/lib/shell-fixtures"
 
-const opaquePane =
-  "shell-opaque-pane flex min-h-0 flex-col overflow-hidden"
-
 function createOpenTab(itemId: string): OpenTab {
   return { id: itemId, itemId }
 }
@@ -86,9 +83,13 @@ export function WorkspaceShell() {
 
   return (
     <div className="app-desktop-canvas flex min-h-dvh p-3 sm:p-4">
-      <div className="mx-auto flex h-[calc(100dvh-1.5rem)] w-full max-w-[1600px] min-w-0 gap-3 sm:h-[calc(100dvh-2rem)]">
+      <div className="shell-unified-window mx-auto flex h-[calc(100dvh-1.5rem)] w-full max-w-[1600px] min-w-0 sm:h-[calc(100dvh-2rem)]">
         {sidebarOpen ? (
-          <aside className={cn("w-60 shrink-0 sm:w-64", opaquePane)}>
+          <aside
+            className={cn(
+              "shell-pane-inset w-60 shrink-0 border-r border-border/60 sm:w-64"
+            )}
+          >
             <AppSidebar
               mode={mode}
               onModeChange={setMode}
@@ -98,7 +99,7 @@ export function WorkspaceShell() {
             />
           </aside>
         ) : null}
-        <section className={cn("min-w-0 flex-1", opaquePane)}>
+        <section className="shell-pane-inset min-w-0 flex-1">
           <MainArea
             sidebarOpen={sidebarOpen}
             onExpandSidebar={expandSidebar}

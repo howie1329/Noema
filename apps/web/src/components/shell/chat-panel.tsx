@@ -25,7 +25,7 @@ export function ChatPanel({ focusedItem, className, onClose }: ChatPanelProps) {
   return (
     <aside
       className={cn(
-        "shell-glass-pane flex min-h-0 w-[min(22rem,30vw)] shrink-0 flex-col text-xs",
+        "shell-pane-glass-inset w-[min(22rem,30vw)] shrink-0 text-xs",
         className
       )}
     >
