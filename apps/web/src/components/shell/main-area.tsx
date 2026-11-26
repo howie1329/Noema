@@ -1,7 +1,7 @@
 import {
+  ChevronLeft,
+  ChevronRight,
   Ellipsis,
-  FileText,
-  MessageSquare,
   PanelRightOpen,
   Share2,
   Star,
@@ -10,18 +10,12 @@ import {
 
 import { Badge } from "@workspace/ui/components/badge"
 import { Button } from "@workspace/ui/components/button"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@workspace/ui/components/breadcrumb"
 import { ScrollArea, ScrollBar } from "@workspace/ui/components/scroll-area"
 import { cn } from "@workspace/ui/lib/utils"
 
 import { ChatStub } from "@/components/shell/chat-stub"
 import { NoteFixture } from "@/components/shell/note-fixture"
+import { WindowDots } from "@/components/shell/window-dots"
 import {
   FIXTURE_ITEMS,
   type FixtureItem,
@@ -46,113 +40,108 @@ export function MainArea({
   onCloseTab,
 }: MainAreaProps) {
   const focusedId = focusedItem.id
-  const breadcrumbSegments = focusedItem.breadcrumbs ?? [focusedItem.title]
 
   return (
     <div className="flex h-full min-h-0 flex-col text-xs">
-      <div className="flex h-8 shrink-0 items-end border-b bg-muted/30 px-1">
-        <ScrollArea className="w-full whitespace-nowrap">
-          <div className="flex h-8 items-end gap-0.5 px-0.5">
-            {openTabs.map((tab) => {
-              const item = FIXTURE_ITEMS[tab.itemId]
-              const isActive = tab.itemId === focusedId
-              const Icon = item.kind === "chat" ? MessageSquare : FileText
-              const canClose = openTabs.length > 1
+      <header className="grid h-11 shrink-0 grid-cols-[1fr_auto_1fr] items-center border-b border-border/50 px-2.5">
+        <div className="flex min-w-0 items-center gap-2">
+          <WindowDots />
+          {!sidebarOpen ? (
+            <Button
+              variant="ghost"
+              size="icon-xs"
+              className="size-6 text-muted-foreground"
+              onClick={onExpandSidebar}
+              aria-label="Expand sidebar"
+            >
+              <PanelRightOpen className="size-3.5" />
+            </Button>
+          ) : null}
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-xs"
+            className="size-6 text-muted-foreground"
+            aria-label="Back"
+            disabled
+          >
+            <ChevronLeft className="size-3.5" />
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-xs"
+            className="size-6 text-muted-foreground"
+            aria-label="Forward"
+            disabled
+          >
+            <ChevronRight className="size-3.5" />
+          </Button>
+          <ScrollArea className="max-w-[12rem] min-w-0 whitespace-nowrap sm:max-w-[16rem]">
+            <div className="flex items-center gap-1 pr-1">
+              {openTabs.map((tab) => {
+                const item = FIXTURE_ITEMS[tab.itemId]
+                const isActive = tab.itemId === focusedId
+                const canClose = openTabs.length > 1
 
-              return (
-                <div
-                  key={tab.id}
-                  className={cn(
-                    "group flex h-7 max-w-[10rem] shrink-0 items-center gap-1 rounded-t-md border border-b-0 px-1.5 text-xs",
-                    isActive
-                      ? "border-border bg-card text-foreground shadow-xs"
-                      : "border-transparent bg-transparent text-muted-foreground hover:bg-muted/50 hover:text-foreground"
-                  )}
-                >
-                  <button
-                    type="button"
-                    className="flex min-w-0 flex-1 items-center gap-1 text-left"
-                    onClick={() => onSelectTab(tab.itemId)}
+                return (
+                  <div
+                    key={tab.id}
+                    className={cn(
+                      "group flex h-6 max-w-[8.5rem] shrink-0 items-center gap-0.5 rounded-full border px-2 text-[11px]",
+                      isActive
+                        ? "border-border bg-muted/80 text-foreground"
+                        : "border-transparent text-muted-foreground hover:bg-muted/40 hover:text-foreground"
+                    )}
                   >
-                    <Icon className="size-3 shrink-0 opacity-70" />
-                    <span className="truncate">{item.title}</span>
-                  </button>
-                  {canClose ? (
                     <button
                       type="button"
-                      className={cn(
-                        "rounded p-0.5 transition-opacity hover:bg-muted",
-                        isActive
-                          ? "opacity-70 hover:opacity-100"
-                          : "opacity-0 group-hover:opacity-70"
-                      )}
-                      aria-label={`Close ${item.title}`}
-                      onClick={(event) => {
-                        event.stopPropagation()
-                        onCloseTab(tab.itemId)
-                      }}
+                      className="min-w-0 truncate text-left"
+                      onClick={() => onSelectTab(tab.itemId)}
                     >
-                      <X className="size-3" />
+                      {item.title}
                     </button>
-                  ) : null}
-                </div>
-              )
-            })}
-          </div>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
-      </div>
+                    {canClose ? (
+                      <button
+                        type="button"
+                        className={cn(
+                          "rounded p-0.5 hover:bg-muted",
+                          isActive
+                            ? "opacity-60"
+                            : "opacity-0 group-hover:opacity-60"
+                        )}
+                        aria-label={`Close ${item.title}`}
+                        onClick={(event) => {
+                          event.stopPropagation()
+                          onCloseTab(tab.itemId)
+                        }}
+                      >
+                        <X className="size-2.5" />
+                      </button>
+                    ) : null}
+                  </div>
+                )
+              })}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        </div>
 
-      <header className="flex h-9 shrink-0 items-center gap-1.5 border-b px-2.5">
-        {!sidebarOpen ? (
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            className="size-7 text-muted-foreground"
-            onClick={onExpandSidebar}
-            aria-label="Expand sidebar"
-          >
-            <PanelRightOpen className="size-3.5" />
-          </Button>
-        ) : null}
+        <h1 className="max-w-[min(40vw,14rem)] truncate px-2 text-center text-sm font-medium tracking-tight">
+          {focusedItem.title}
+        </h1>
 
-        <Breadcrumb className="min-w-0 flex-1">
-          <BreadcrumbList className="flex-nowrap gap-1 overflow-hidden text-xs sm:gap-1.5">
-            {breadcrumbSegments.map((segment, index) => {
-              const isLast = index === breadcrumbSegments.length - 1
-              return (
-                <span key={`${segment}-${index}`} className="contents">
-                  {index > 0 ? (
-                    <BreadcrumbSeparator className="[&>svg]:size-3" />
-                  ) : null}
-                  <BreadcrumbItem className="min-w-0">
-                    {isLast ? (
-                      <BreadcrumbPage className="truncate text-xs font-normal">
-                        {segment}
-                      </BreadcrumbPage>
-                    ) : (
-                      <span className="truncate text-muted-foreground">
-                        {segment}
-                      </span>
-                    )}
-                  </BreadcrumbItem>
-                </span>
-              )
-            })}
-          </BreadcrumbList>
-        </Breadcrumb>
-
-        <div className="flex shrink-0 items-center gap-0.5">
+        <div className="flex items-center justify-end gap-0.5">
           <Badge
             variant="secondary"
-            className="h-5 px-1.5 text-xs font-normal"
+            className="hidden h-5 px-1.5 text-[11px] font-normal sm:inline-flex"
           >
             Saved
           </Badge>
           <Button
             variant="ghost"
-            size="icon-sm"
-            className="size-7 text-muted-foreground"
+            size="icon-xs"
+            className="size-6 text-muted-foreground"
             aria-label="Share"
             disabled
           >
@@ -160,8 +149,8 @@ export function MainArea({
           </Button>
           <Button
             variant="ghost"
-            size="icon-sm"
-            className="size-7 text-muted-foreground"
+            size="icon-xs"
+            className="size-6 text-muted-foreground"
             aria-label="Favorite"
             disabled
           >
@@ -169,8 +158,8 @@ export function MainArea({
           </Button>
           <Button
             variant="ghost"
-            size="icon-sm"
-            className="size-7 text-muted-foreground"
+            size="icon-xs"
+            className="size-6 text-muted-foreground"
             aria-label="More options"
             disabled
           >

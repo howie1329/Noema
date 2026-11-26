@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useState } from "react"
 
 import { AppSidebar } from "@/components/shell/app-sidebar"
+import { ChatPanel } from "@/components/shell/chat-panel"
 import { MainArea } from "@/components/shell/main-area"
+import { cn } from "@workspace/ui/lib/utils"
+
 import {
   DEFAULT_FOCUSED_ID,
   FIXTURE_ITEMS,
@@ -9,8 +12,8 @@ import {
   type ShellMode,
 } from "@/lib/shell-fixtures"
 
-const cardChrome =
-  "flex min-h-0 flex-col overflow-hidden rounded-xl border bg-card shadow-sm"
+const opaquePane =
+  "shell-opaque-pane flex min-h-0 flex-col overflow-hidden"
 
 function createOpenTab(itemId: string): OpenTab {
   return { id: itemId, itemId }
@@ -18,6 +21,7 @@ function createOpenTab(itemId: string): OpenTab {
 
 export function WorkspaceShell() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [chatOpen, setChatOpen] = useState(true)
   const [mode, setMode] = useState<ShellMode>("home")
   const [focusedId, setFocusedId] = useState(DEFAULT_FOCUSED_ID)
   const [openTabs, setOpenTabs] = useState<OpenTab[]>(() => [
@@ -77,31 +81,40 @@ export function WorkspaceShell() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [toggleSidebar])
 
-  const focusedItem = FIXTURE_ITEMS[focusedId] ?? FIXTURE_ITEMS[DEFAULT_FOCUSED_ID]
+  const focusedItem =
+    FIXTURE_ITEMS[focusedId] ?? FIXTURE_ITEMS[DEFAULT_FOCUSED_ID]
 
   return (
-    <div className="flex h-dvh gap-2 p-2">
-      {sidebarOpen ? (
-        <aside className={`w-64 shrink-0 ${cardChrome}`}>
-          <AppSidebar
-            mode={mode}
-            onModeChange={setMode}
-            focusedId={focusedId}
-            onSelectItem={selectItem}
-            onCollapse={toggleSidebar}
+    <div className="app-desktop-canvas flex min-h-dvh p-3 sm:p-4">
+      <div className="mx-auto flex h-[calc(100dvh-1.5rem)] w-full max-w-[1600px] min-w-0 gap-3 sm:h-[calc(100dvh-2rem)]">
+        {sidebarOpen ? (
+          <aside className={cn("w-60 shrink-0 sm:w-64", opaquePane)}>
+            <AppSidebar
+              mode={mode}
+              onModeChange={setMode}
+              focusedId={focusedId}
+              onSelectItem={selectItem}
+              onCollapse={toggleSidebar}
+            />
+          </aside>
+        ) : null}
+        <section className={cn("min-w-0 flex-1", opaquePane)}>
+          <MainArea
+            sidebarOpen={sidebarOpen}
+            onExpandSidebar={expandSidebar}
+            openTabs={openTabs}
+            focusedItem={focusedItem}
+            onSelectTab={selectTab}
+            onCloseTab={closeTab}
           />
-        </aside>
-      ) : null}
-      <section className={`min-w-0 flex-1 ${cardChrome}`}>
-        <MainArea
-          sidebarOpen={sidebarOpen}
-          onExpandSidebar={expandSidebar}
-          openTabs={openTabs}
-          focusedItem={focusedItem}
-          onSelectTab={selectTab}
-          onCloseTab={closeTab}
-        />
-      </section>
+        </section>
+        {chatOpen ? (
+          <ChatPanel
+            focusedItem={focusedItem}
+            onClose={() => setChatOpen(false)}
+          />
+        ) : null}
+      </div>
     </div>
   )
 }

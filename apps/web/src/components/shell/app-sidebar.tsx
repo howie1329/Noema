@@ -11,7 +11,6 @@ import {
   Search,
   Settings,
   Sparkles,
-  SunMoon,
   Trash2,
 } from "lucide-react"
 
@@ -40,6 +39,8 @@ import {
 } from "@workspace/ui/components/sidebar"
 import { Tabs, TabsList, TabsTrigger } from "@workspace/ui/components/tabs"
 import { cn } from "@workspace/ui/lib/utils"
+
+import { ModeToggle } from "@/components/mode-toggle"
 
 import {
   FIXTURE_FAVORITE_IDS,
@@ -427,15 +428,7 @@ export function AppSidebar({
             >
               <Trash2 className="size-3.5" />
             </Button>
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon-sm"
-              className="size-7 text-muted-foreground"
-              aria-label="Appearance"
-            >
-              <SunMoon className="size-3.5" />
-            </Button>
+            <ModeToggle variant="ghost" />
             <Button
               type="button"
               variant="ghost"
